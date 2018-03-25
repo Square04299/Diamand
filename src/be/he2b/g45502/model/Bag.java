@@ -8,6 +8,9 @@ public class Bag {
 
     private int nbRubies;
 
+    /**
+     * Contructor with no attribute Will initialise the amount of rubies in the bag to 0
+     */
     public Bag() {
         this.nbRubies = 0;
     }

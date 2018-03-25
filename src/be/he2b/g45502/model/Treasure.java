@@ -12,11 +12,19 @@ public class Treasure {
     private int rubies;
     private final int initNbRubies;
 
+    /**
+     * Constructor witout attribute Will generate a random number of rubies between 1 and 15 to add to the treasure
+     */
     public Treasure() {
         this.rubies = (int) Math.ceil(Math.random() * 15);
         this.initNbRubies = this.rubies;
     }
 
+    /**
+     * Constructor with attribute
+     *
+     * @param rubies Fixed number of rubies in the Treasure
+     */
     public Treasure(int rubies) {
         this.initNbRubies = rubies;
         this.rubies = initNbRubies;

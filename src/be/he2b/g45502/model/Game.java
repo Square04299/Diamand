@@ -12,6 +12,9 @@ public class Game implements Model {
     private Cave cave;
     private List<Explorer> explorers;
 
+    /**
+     * Contructor Game will create the cave and the list of player
+     */
     public Game() {
         this.cave = new Cave();
         this.explorers = new ArrayList();

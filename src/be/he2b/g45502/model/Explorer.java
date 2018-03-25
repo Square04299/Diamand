@@ -12,6 +12,11 @@ public class Explorer {
     private Bag bag;
     private State state;
 
+    /**
+     * Constructor with attribute
+     *
+     * @param pseudonym Name of the explorer
+     */
     public Explorer(String pseudonym) {
         if (pseudonym == null) {
             throw new IllegalArgumentException("No name has been given");
