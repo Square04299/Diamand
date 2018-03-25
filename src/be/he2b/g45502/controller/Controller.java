@@ -1,6 +1,5 @@
 package be.he2b.g45502.controller;
 
-import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
 import be.he2b.g45502.model.Model;
 import be.he2b.g45502.view.View;
@@ -38,5 +37,13 @@ public class Controller {
             view.displayGame();
         }
         
-    }    
+    }
+    
+    public static void main(String[] args) {
+        Game game = new Game();
+        View view = new View(game);
+        Controller diamant = new Controller(game, view);
+        
+        diamant.startGame();
+    }
 }
