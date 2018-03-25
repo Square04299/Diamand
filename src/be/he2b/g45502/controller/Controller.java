@@ -16,9 +16,12 @@ public class Controller {
         this.game = new Game();
         this.view = new View(game);
     }
-    
+    /**
+     * Will start the game. Will ask the name and amount of player
+     * and check if they want to continue or not
+     * end the game if everyone is out of the cave
+     */
     public void startGame(){
-        
         boolean newExplorer = true;
         boolean choiceToContinue;
         

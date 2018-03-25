@@ -18,13 +18,19 @@ public class View {
         this.in = new Scanner(System.in);
         this.game = new Game();
     }
-    
+    /**
+     * Ask the name of the explorer
+     * @return The name added
+     */
     public Explorer askExplorer(){
         System.out.println("Name of the new Explorer");
         Explorer e = new Explorer(in.nextLine());
         return e;
     }
-    
+    /**
+     * Check if you want to add another player
+     * @return True if there is another player to add
+     */
     public boolean isThereNewExplorerToAdd(){
         System.out.println("Is there a new Explorer to add to the game");
         System.out.println("\"YES\" or \"NO\"");
@@ -39,7 +45,11 @@ public class View {
         }
         return toUpperCase.equals("YES");
     }
-    
+    /**
+     * Ask if the explorer wants to continue exploring
+     * @param explorer Explorer we are asking the question
+     * @return True if he wants to continue
+     */
     public boolean askExplorerChoiceToContinue(Explorer explorer){
         System.out.println(explorer.getPseudonym() + 
                 " do you want to continue ?");
@@ -56,7 +66,9 @@ public class View {
         }
         return toUpperCase.equals("YES");
     }
-    
+    /**
+     * Display the current state of the game with the name and amount of rubies each player own in they bags
+     */
     public void displayGame(){
         System.out.println("Last tile discovered : " 
                 + game.getCave().getLastDiscoveredTreasure());
@@ -65,7 +77,9 @@ public class View {
                     + game.getExplorers().get(i).getBag().getNbRubies());
         }
     }
-    
+    /**
+     * Display the end screen with the total amount of rubies each player has
+     */
     public void displayEnd(){
         System.out.println("Thank you for playing");
         System.out.println("Score : ");

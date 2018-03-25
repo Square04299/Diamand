@@ -8,7 +8,6 @@ import java.util.Objects;
  */
 public class Explorer {
 
-
     private String pseudonym;
     private Bag bag;
     private State state;
@@ -21,36 +20,55 @@ public class Explorer {
         this.bag = new Bag();
         this.state = State.EXPLORING;
     }
+
     /**
      * Get the name of the player
+     *
      * @return name of the player given
      */
     public String getPseudonym() {
         return pseudonym;
     }
+
     /**
      * Retreive the bag
+     *
      * @return Return the bag
      */
     public Bag getBag() {
         return bag;
     }
+
     /**
-     * Get the State 
-     * @return 
+     * Get the State
+     *
+     * @return
      */
     public State getState() {
         return state;
     }
 
+    /**
+     * Going to set the state of the explorer
+     *
+     * @param state New state he is going to be in
+     */
     public void setState(State state) {
         this.state = state;
     }
 
+    /**
+     * Add a amount of rubbies to the bag
+     *
+     * @param nbRubies Number of rubies to add
+     */
     public void addToBag(int nbRubies) {
         bag.addRubies(nbRubies);
     }
 
+    /**
+     * Set the State of the explorer to leave
+     */
     public void takeDecisionToLeave() {
         setState(State.LEAVING);
     }
@@ -83,5 +101,5 @@ public class Explorer {
             return false;
         }
         return this.state == other.state;
-    } 
+    }
 }
