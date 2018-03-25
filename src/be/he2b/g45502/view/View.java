@@ -41,16 +41,16 @@ public class View {
     }
     
     public boolean askExplorerChoiceToContinue(Explorer explorer){
-        System.out.println("Do you want to continue "
-                + explorer.getPseudonym() );
+        System.out.println(explorer.getPseudonym() + 
+                " do you want to continue ?");
         System.out.println("\"YES\" or \"NO\"");
         String response = in.nextLine();
         String toUpperCase = response.toUpperCase();
         
         while (!toUpperCase.equals("YES") || !toUpperCase.equals("NO")) {            
             System.out.println("The response need to be \"YES\" or \"NO\" !!");
-            System.out.println("Do you want to continue " 
-                    + explorer.getPseudonym());
+            System.out.println(explorer.getPseudonym() + 
+                    " do you want to continue ?");
             response = in.nextLine();
             toUpperCase = response.toUpperCase();
         }
