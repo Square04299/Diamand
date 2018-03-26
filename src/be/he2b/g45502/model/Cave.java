@@ -42,6 +42,7 @@ public class Cave {
         }
         Treasure newTreasure = new Treasure();
         newTreasure.explore(explorers);
+        setLastDiscoveredTreasure(newTreasure);
     }
 
 }

@@ -10,7 +10,7 @@ import be.he2b.g45502.view.View;
  */
 public class Controller {
 
-    private Model game;
+    private Game game;
     private View view;
 
     /**
@@ -19,13 +19,13 @@ public class Controller {
      * @param game Create the treasure and cave
      * @param view Create the text the player will see
      */
-    public Controller(Model game, View view) {
-        this.game = new Game();
-        this.view = new View(game);
+    public Controller(Game game, View view) {
+        this.game = game;
+        this.view = view;
     }
 
     /**
-     * Will start the game. Will ask the name and amount of player and check if they want to continue or not end the game if everyone is out of the cave
+     * Will start the game. Will ask the name and amount of player and check if they want to continue or not will end the game if everyone is out of the cave
      */
     public void startGame() {
         boolean newExplorer = true;
@@ -37,12 +37,15 @@ public class Controller {
                 newExplorer = view.isThereNewExplorerToAdd();
             }
             game.moveForward();
-            for (int i = 0; i < game.getExploringExplorers().size(); i++) {
+            int nbExplorer = game.getExploringExplorers().size();
+            for (int i = 0; i < nbExplorer; i++) {
                 choiceToContinue = view.askExplorerChoiceToContinue(game.getExploringExplorers().get(i));
                 if (!choiceToContinue) {
                     game.handleExplorerDecisionToLeave(game.getExploringExplorers().get(i));
+                    i--;
+                    nbExplorer--;
                 }
-            }
+            }       
             view.displayGame();
         }
 

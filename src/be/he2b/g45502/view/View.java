@@ -12,16 +12,16 @@ import java.util.Scanner;
 public class View {
 
     private Scanner in;
-    private Model game;
+    private Game game;
 
     /**
      * Create an other View with the model Game
      *
      * @param game
      */
-    public View(Model game) {
+    public View(Game game) {
         this.in = new Scanner(System.in);
-        this.game = new Game();
+        this.game = game;
     }
 
     /**
@@ -31,7 +31,7 @@ public class View {
      */
     public Explorer askExplorer() {
         System.out.println("Name of the new Explorer");
-        Explorer e = new Explorer(in.nextLine());
+        Explorer e = new Explorer(in.next());
         return e;
     }
 
@@ -43,13 +43,13 @@ public class View {
     public boolean isThereNewExplorerToAdd() {
         System.out.println("Is there a new Explorer to add to the game");
         System.out.println("\"YES\" or \"NO\"");
-        String response = in.nextLine();
+        String response = in.next();
         String toUpperCase = response.toUpperCase();
 
-        while (!toUpperCase.equals("YES") || !toUpperCase.equals("NO")) {
+        while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
             System.out.println("The response need to be \"YES\" or \"NO\" !!");
             System.out.println("Is there a new Explorer to add to the game");
-            response = in.nextLine();
+            response = in.next();
             toUpperCase = response.toUpperCase();
         }
         return toUpperCase.equals("YES");
@@ -65,14 +65,14 @@ public class View {
         System.out.println(explorer.getPseudonym()
                 + " do you want to continue ?");
         System.out.println("\"YES\" or \"NO\"");
-        String response = in.nextLine();
+        String response = in.next();
         String toUpperCase = response.toUpperCase();
 
-        while (!toUpperCase.equals("YES") || !toUpperCase.equals("NO")) {
+        while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
             System.out.println("The response need to be \"YES\" or \"NO\" !!");
             System.out.println(explorer.getPseudonym()
                     + " do you want to continue ?");
-            response = in.nextLine();
+            response = in.next();
             toUpperCase = response.toUpperCase();
         }
         return toUpperCase.equals("YES");

@@ -70,4 +70,11 @@ public class Treasure {
         }
     }
 
+    @Override
+    public String toString() {
+        return ""+rubies;
+    }
+    
+    
+
 }
