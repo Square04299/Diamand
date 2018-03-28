@@ -11,7 +11,7 @@ import be.he2b.g45502.view.View;
 public class Main {
 
     /**
-     * Will launch the game
+     * Will launch the game with the game and view created
      *
      * @param args
      */
