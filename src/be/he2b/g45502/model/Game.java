@@ -5,12 +5,13 @@ import java.util.List;
 
 /**
  *
- * @author square
+ * @author 45502
  */
 public class Game implements Model {
 
     private Cave cave;
     private List<Explorer> explorers;
+    private List<Explorer> exploringExplorers;
 
     /**
      * Contructor Game will create the cave and the list of player
@@ -35,7 +36,7 @@ public class Game implements Model {
      */
     @Override
     public void moveForward() {
-        cave.discoverNewTreasure(explorers);
+        cave.discoverNewTreasure(getExploringExplorers());
     }
 
     /**
@@ -83,7 +84,7 @@ public class Game implements Model {
      */
     @Override
     public List<Explorer> getExploringExplorers() {
-        List<Explorer> exploringExplorers = new ArrayList<>();
+        exploringExplorers = new ArrayList<>();
         for (int i = 0; i < explorers.size(); i++) {
             if (explorers.get(i).getState() == State.EXPLORING) {
                 exploringExplorers.add(explorers.get(i));
@@ -103,6 +104,10 @@ public class Game implements Model {
             throw new RuntimeException();
         }
         explorer.takeDecisionToLeave();
+    }
+
+    public Treasure getLastDiscoveredTreasure() {
+        return cave.getLastDiscoveredTreasure();
     }
 
 }

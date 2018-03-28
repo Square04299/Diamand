@@ -2,14 +2,15 @@ package be.he2b.g45502.model;
 
 /**
  *
- * @author square
+ * @author 45502
  */
 public class Bag {
 
     private int nbRubies;
 
     /**
-     * Contructor with no attribute Will initialise the amount of rubies in the bag to 0
+     * Contructor with no attribute Will initialise the amount of rubies in the
+     * bag to 0
      */
     public Bag() {
         this.nbRubies = 0;

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author square
+ * @author 45502
  */
 public class Explorer {
 
@@ -60,6 +60,15 @@ public class Explorer {
      */
     public void setState(State state) {
         this.state = state;
+    }
+
+    /**
+     * Get the amount of rubies in the bag
+     *
+     * @return Nomber of rubies
+     */
+    public int getNbRubies() {
+        return bag.getNbRubies();
     }
 
     /**

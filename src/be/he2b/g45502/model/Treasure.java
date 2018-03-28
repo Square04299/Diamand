@@ -5,15 +5,17 @@ import java.util.List;
 
 /**
  *
- * @author square
+ * @author 45502
  */
 public class Treasure {
 
     private int rubies;
     private final int initNbRubies;
+    private List<Explorer> isExploring;
 
     /**
-     * Constructor witout attribute Will generate a random number of rubies between 1 and 15 to add to the treasure
+     * Constructor witout attribute Will generate a random number of rubies
+     * between 1 and 15 to add to the treasure
      */
     public Treasure() {
         this.rubies = (int) Math.ceil(Math.random() * 15);
@@ -56,25 +58,23 @@ public class Treasure {
      */
     public void explore(List<Explorer> explorers) {
         if (!explorers.isEmpty()) {
-            List<Explorer> isExploring = new ArrayList<>();
-            for (int i = 0; i < explorers.size(); i++) {
-                if (explorers.get(i).getState() == State.EXPLORING) {
-                    isExploring.add(explorers.get(i));
+            isExploring = new ArrayList<>();
+            for (Explorer explorer : explorers) {
+                if (explorer.getState() == State.EXPLORING) {
+                    isExploring.add(explorer);
                 }
             }
-            int rubiesToGiven = initNbRubies / isExploring.size();
-            rubies = initNbRubies - isExploring.size() * rubiesToGiven;
+
+            rubies = initNbRubies % isExploring.size();
             for (Explorer explorer : isExploring) {
-                explorer.addToBag(rubiesToGiven);
+                explorer.addToBag(initNbRubies / isExploring.size());
             }
         }
     }
 
     @Override
     public String toString() {
-        return ""+rubies;
+        return "" + rubies;
     }
-    
-    
 
 }
