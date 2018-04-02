@@ -28,7 +28,11 @@ public class Game implements Model {
      */
     @Override
     public void addExplorer(Explorer explorer) {
-        explorers.add(explorer);
+        if (isItPossibleToAddExplorer()) {
+            explorers.add(explorer);
+        }else{
+            throw new GameException();
+        }
     }
 
     /**
@@ -108,6 +112,23 @@ public class Game implements Model {
 
     public Treasure getLastDiscoveredTreasure() {
         return cave.getLastDiscoveredTreasure();
+    }
+
+    @Override
+    public void start() {
+        if(!isItPossibleToAddExplorer() && !isThereEnoughExplorer()){
+            throw new GameException();
+        }
+    }
+
+    @Override
+    public boolean isThereEnoughExplorer() {
+        return getExplorers().size() >= 3;
+    }
+
+    @Override
+    public boolean isItPossibleToAddExplorer() {
+        return getExplorers().size() < 8;
     }
 
 }

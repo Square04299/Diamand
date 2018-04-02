@@ -2,7 +2,7 @@ package be.he2b.g45502.model;
 
 /**
  *
- * @author square
+ * @author 45502
  */
 public class GameException extends RuntimeException {
 
