@@ -101,7 +101,7 @@ public class Game implements Model {
     @Override
     public void handleExplorerDecisionToLeave(Explorer explorer) {
         if (explorers.isEmpty()) {
-            throw new RuntimeException();
+            throw new GameException();
         }
         explorer.takeDecisionToLeave();
     }
