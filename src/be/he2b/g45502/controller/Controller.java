@@ -12,6 +12,8 @@ public class Controller {
 
     private Game game;
     private View view;
+    private boolean newExplorer;
+    private boolean choiceToContinue;
 
     /**
      * Contructor with attributes
@@ -22,6 +24,7 @@ public class Controller {
     public Controller(Game game, View view) {
         this.game = game;
         this.view = view;
+        this.newExplorer = true;
     }
 
     /**
@@ -30,10 +33,8 @@ public class Controller {
      * cave
      */
     public void startGame() {
-        boolean newExplorer = true;
-        boolean choiceToContinue;
 
-        while (newExplorer) {
+        while (newExplorer || (game.isThereEnoughExplorer() && game.isItPossibleToAddExplorer())) {
             game.addExplorer(view.askExplorer());
             newExplorer = view.isThereNewExplorerToAdd();
         }
