@@ -28,10 +28,10 @@ public class Game implements Model {
      */
     @Override
     public void addExplorer(Explorer explorer) {
-        if (isItPossibleToAddExplorer()) {
+        if (getExplorers().size() < 8) {
             explorers.add(explorer);
         }else{
-            throw new GameException();
+            throw new GameException("Too much player");
         }
     }
 
@@ -116,7 +116,7 @@ public class Game implements Model {
 
     @Override
     public void start() {
-        if(!isItPossibleToAddExplorer() && !isThereEnoughExplorer()){
+        if(!isItPossibleToAddExplorer()){
             throw new GameException();
         }
     }
@@ -128,7 +128,7 @@ public class Game implements Model {
 
     @Override
     public boolean isItPossibleToAddExplorer() {
-        return getExplorers().size() < 8;
+        return isThereEnoughExplorer() && getExplorers().size() < 8;
     }
 
 }
