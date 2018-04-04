@@ -74,7 +74,7 @@ public interface Model {
     void start();
 
     /**
-     * Check the amount of playing.
+     * Check the amount of player (explorer).
      *
      * @return True If 3 explorer or more are entered.
      */

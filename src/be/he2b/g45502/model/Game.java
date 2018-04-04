@@ -30,7 +30,7 @@ public class Game implements Model {
     public void addExplorer(Explorer explorer) {
         if (getExplorers().size() < 8) {
             explorers.add(explorer);
-        }else{
+        } else {
             throw new GameException("Too much player");
         }
     }
@@ -114,18 +114,33 @@ public class Game implements Model {
         return cave.getLastDiscoveredTreasure();
     }
 
+    /**
+     * Consider if the number of explorer respect the rules.
+     *
+     * @throws GameException If the rules are not respected.
+     */
     @Override
     public void start() {
-        if(!isItPossibleToAddExplorer()){
+        if (!isItPossibleToAddExplorer()) {
             throw new GameException();
         }
     }
 
+    /**
+     * Check the amount of player (explorer).
+     *
+     * @return True If 3 explorer or more are entered.
+     */
     @Override
     public boolean isThereEnoughExplorer() {
         return getExplorers().size() >= 3;
     }
 
+    /**
+     * Verifie if you can enter a new player (explorer) to the game.
+     *
+     * @return true If you can add a new player (explorer).
+     */
     @Override
     public boolean isItPossibleToAddExplorer() {
         return isThereEnoughExplorer() && getExplorers().size() < 8;
