@@ -121,7 +121,7 @@ public class Game implements Model {
      */
     @Override
     public void start() {
-        if (!isItPossibleToAddExplorer()) {
+        if (getExplorers().size() > 8) {
             throw new GameException();
         }
     }
@@ -143,7 +143,7 @@ public class Game implements Model {
      */
     @Override
     public boolean isItPossibleToAddExplorer() {
-        return isThereEnoughExplorer() && getExplorers().size() < 8;
+        return getExplorers().size() < 8;
     }
 
 }
