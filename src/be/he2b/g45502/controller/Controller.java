@@ -34,9 +34,13 @@ public class Controller {
      */
     public void startGame() {
 
-        while (newExplorer || (game.isThereEnoughExplorer() && game.isItPossibleToAddExplorer())) {
+        while ((!game.isThereEnoughExplorer() && game.isItPossibleToAddExplorer()) || newExplorer ) {
             game.addExplorer(view.askExplorer());
-            newExplorer = view.isThereNewExplorerToAdd();
+            if (game.getExplorers().size() < 8) {
+                newExplorer = view.isThereNewExplorerToAdd();
+            }else{
+                newExplorer = false;
+            }
         }
 
         while (!game.isOver()) {

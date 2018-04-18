@@ -109,7 +109,7 @@ public class Game implements Model {
         }
         explorer.takeDecisionToLeave();
     }
-
+    
     public Treasure getLastDiscoveredTreasure() {
         return cave.getLastDiscoveredTreasure();
     }
@@ -145,5 +145,5 @@ public class Game implements Model {
     public boolean isItPossibleToAddExplorer() {
         return getExplorers().size() < 8;
     }
-
+    
 }
