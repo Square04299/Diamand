@@ -91,13 +91,12 @@ public class View {
     /**
      * Display the end screen with the total amount of rubies each player has
      */
-    public void displayEnd() {
+    public void displayWinner() {
         System.out.println("Thank you for playing");
-        System.out.println("Score");
-        for (Explorer explorer : game.getExplorers()) {
-            System.out.println("Name : " + explorer.getPseudonym());
-            System.out.println("Rubis : " + explorer.getNbRubies());
-        }
+        System.out.println("Winner");
+            System.out.println("Name : " + game.getWinner());
+            System.out.println("Rubis : " + game.getWinner().getFortune());
     }
 
+    
 }

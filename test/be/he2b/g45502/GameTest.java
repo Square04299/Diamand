@@ -3,9 +3,11 @@ package be.he2b.g45502;
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
 import be.he2b.g45502.model.State;
+import be.he2b.g45502.model.Treasure;
 import org.junit.Test;
 
 import java.util.List;
+import org.junit.Assert;
 
 import static org.junit.Assert.*;
 
@@ -166,5 +168,24 @@ public class GameTest {
         game.addExplorer(e8);
         game.addExplorer(e9);
         assertFalse(game.isItPossibleToAddExplorer());
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void getWinner_cas1(){
+        Game game = new Game();
+        Explorer e1 = new Explorer("pbt");
+        Explorer e2 = new Explorer("sdr");
+        Explorer e3 = new Explorer("jlc");
+        Explorer e4 = new Explorer("abs");
+        game.addExplorer(e1);
+        game.addExplorer(e2);
+        game.addExplorer(e3);
+        game.addExplorer(e4);
+        e1.addToBag(2);
+        e2.addToBag(7);
+        e3.addToBag(3);
+        e4.addToBag(5);
+        assertEquals(e2, game.getWinner());
+        
     }
 }

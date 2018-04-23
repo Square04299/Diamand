@@ -50,15 +50,7 @@ public class Game implements Model {
      */
     @Override
     public boolean isOver() {
-        boolean isOver = true;
-        int i = 0;
-        while (isOver && i < explorers.size()) {
-            if (explorers.get(i).getState() == State.EXPLORING) {
-                isOver = false;
-            }
-            i++;
-        }
-        return isOver;
+        return getExploringExplorers().isEmpty();
     }
 
     /**
@@ -109,7 +101,7 @@ public class Game implements Model {
         }
         explorer.takeDecisionToLeave();
     }
-    
+
     public Treasure getLastDiscoveredTreasure() {
         return cave.getLastDiscoveredTreasure();
     }
@@ -145,5 +137,28 @@ public class Game implements Model {
     public boolean isItPossibleToAddExplorer() {
         return getExplorers().size() < 8;
     }
-    
+
+    /**
+     * Check the winner of the game
+     *
+     * @return The explorer with the biggest Forturne
+     * @exception GameException if it's called before the end of the game
+     */
+    @Override
+    public Explorer getWinner() {
+        int valueI = 0;
+        if (isOver()) {
+            int max = getExplorers().get(0).getFortune();
+            for (int i = 0; i < getExplorers().size(); i++) {
+                if (max < getExplorers().get(i).getFortune()) {
+                    max = getExplorers().get(i).getFortune();
+                    valueI = i;
+                }
+            }
+        } else {
+            throw new GameException("You can show the winner util you finish the game");
+        }
+        return getExplorers().get(valueI);
+    }
+
 }

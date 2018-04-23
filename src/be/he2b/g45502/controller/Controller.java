@@ -34,9 +34,9 @@ public class Controller {
      */
     public void startGame() {
 
-        while ((!game.isThereEnoughExplorer() && game.isItPossibleToAddExplorer()) || newExplorer ) {
+        while (!game.isThereEnoughExplorer() || newExplorer ) {
             game.addExplorer(view.askExplorer());
-            if (game.getExplorers().size() < 8) {
+            if (game.isItPossibleToAddExplorer()) {
                 newExplorer = view.isThereNewExplorerToAdd();
             }else{
                 newExplorer = false;
@@ -53,7 +53,7 @@ public class Controller {
                 }
             }
         }
-        view.displayEnd();
+        view.displayWinner();
     }
 
 }

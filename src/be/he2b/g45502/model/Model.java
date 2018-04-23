@@ -86,4 +86,11 @@ public interface Model {
      * @return true If you can add a new player (explorer).
      */
     boolean isItPossibleToAddExplorer();
+    
+    /**
+     * Check the winner of the game
+     * @return The explorer with the biggest Forturne
+     * @exception GameException if it's called before the end of the game
+     */
+    Explorer getWinner();
 }

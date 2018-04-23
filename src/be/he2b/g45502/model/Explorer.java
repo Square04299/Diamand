@@ -86,6 +86,14 @@ public class Explorer {
     public void takeDecisionToLeave() {
         setState(State.LEAVING);
     }
+    
+    /**
+     * Get the amount of rubies of the explorer
+     * @return The amount of rubies
+     */
+    public int getFortune(){
+        return bag.getNbRubies();
+    }
 
     @Override
     public int hashCode() {
@@ -115,5 +123,10 @@ public class Explorer {
             return false;
         }
         return this.state == other.state;
+    }
+
+    @Override
+    public String toString() {
+        return this.pseudonym;
     }
 }
