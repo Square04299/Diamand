@@ -160,5 +160,17 @@ public class Game implements Model {
         }
         return getExplorers().get(valueI);
     }
+    
+    /**
+     * Change the stats of each leaving explorer to Camping
+     */
+    @Override
+    public void makeExplorersLeave() {
+        for (Explorer explorer : getExplorers()) {
+            if(explorer.getState() == State.LEAVING){
+                explorer.reachCamp();
+            }
+        }
+    }
 
 }

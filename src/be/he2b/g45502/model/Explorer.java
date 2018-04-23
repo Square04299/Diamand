@@ -54,15 +54,6 @@ public class Explorer {
     }
 
     /**
-     * Going to set the state of the explorer
-     *
-     * @param state New state he is going to be in
-     */
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    /**
      * Get the amount of rubies in the bag
      *
      * @return Nomber of rubies
@@ -84,7 +75,7 @@ public class Explorer {
      * Set the State of the explorer to leave
      */
     public void takeDecisionToLeave() {
-        setState(State.LEAVING);
+        this.state = State.LEAVING;
     }
     
     /**
@@ -93,6 +84,13 @@ public class Explorer {
      */
     public int getFortune(){
         return bag.getNbRubies();
+    }
+    
+    /**
+     * Set the State of the explorer to camping
+     */
+    public void reachCamp(){
+        this.state = State.CAMPING;
     }
 
     @Override

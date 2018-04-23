@@ -93,4 +93,9 @@ public interface Model {
      * @exception GameException if it's called before the end of the game
      */
     Explorer getWinner();
+    
+    /**
+     * Make Explorer to leave the cave and go back to camp
+     */
+    void makeExplorersLeave();
 }

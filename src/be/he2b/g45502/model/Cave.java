@@ -1,5 +1,6 @@
 package be.he2b.g45502.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,8 +10,14 @@ import java.util.List;
 public class Cave {
 
     private Treasure lastDiscoveredTreasure;
+    private List<Treasure> path;
 
     public Cave() {
+        this.path = new ArrayList();
+    }
+
+    public List<Treasure> getPath() {
+        return path;
     }
 
     /**
@@ -34,5 +41,12 @@ public class Cave {
         this.lastDiscoveredTreasure = new Treasure();
         lastDiscoveredTreasure.explore(explorers);
     }
-
+    
+    /**
+     * Allow all player that will return to camp to see the path
+     * @param explorers List of explorer that want to return to camp
+     */
+    public void returnToCamp(List<Explorer> explorers){
+        
+    }
 }
