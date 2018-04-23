@@ -40,7 +40,7 @@ public class Game implements Model {
      */
     @Override
     public void moveForward() {
-        cave.discoverNewTreasure(getExploringExplorers());
+        cave.getCurrentEntrance().discoverNewTreasure(getExploringExplorers());    
     }
 
     /**
@@ -81,9 +81,9 @@ public class Game implements Model {
     @Override
     public List<Explorer> getExploringExplorers() {
         exploringExplorers = new ArrayList<>();
-        for (int i = 0; i < explorers.size(); i++) {
-            if (explorers.get(i).getState() == State.EXPLORING) {
-                exploringExplorers.add(explorers.get(i));
+        for (Explorer explorer : explorers) {
+            if (explorer.getState() == State.EXPLORING) {
+                exploringExplorers.add(explorer);
             }
         }
         return exploringExplorers;
@@ -101,9 +101,12 @@ public class Game implements Model {
         }
         explorer.takeDecisionToLeave();
     }
-
+    /**
+     * Get the last discorded treasure
+     * @return The old treasure
+     */
     public Treasure getLastDiscoveredTreasure() {
-        return cave.getLastDiscoveredTreasure();
+        return cave.getCurrentEntrance().getLastDiscoveredTreasure();
     }
 
     /**

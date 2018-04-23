@@ -7,5 +7,19 @@ package be.he2b.g45502.model;
  * @author 45502
  */
 public enum State {
-    EXPLORING, LEAVING, CAMPING;
+
+    /**
+     *Player is in the cave
+     */
+    EXPLORING,
+
+    /**
+     *Player wants to leave the cave
+     */
+    LEAVING,
+
+    /**
+     *Player that left the cave and are on the camping
+     */
+    CAMPING;
 }

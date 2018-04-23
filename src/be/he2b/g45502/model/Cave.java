@@ -1,52 +1,68 @@
 package be.he2b.g45502.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author 45502
  */
 public class Cave {
+    private int nbExploredEntrance;
+    private CaveEntrance currentEntrance;
 
-    private Treasure lastDiscoveredTreasure;
-    private List<Treasure> path;
-
+    /**
+     *Controctor set the nbExploredEntrance to 0
+     */
     public Cave() {
-        this.path = new ArrayList();
-    }
-
-    public List<Treasure> getPath() {
-        return path;
+        this.nbExploredEntrance = 0;
     }
 
     /**
-     * Create a new treasure
-     *
-     * @return return the new treasure created
+     *Get the amount of Cave explored
+     * @return amount of cave explored
      */
-    public Treasure getLastDiscoveredTreasure() {
-        return lastDiscoveredTreasure;
+    public int getNbExploredEntrance() {
+        return nbExploredEntrance;
     }
 
     /**
-     * Will create a new room for the (explorers)
-     *
-     * @param explorers list of player
+     *Get the currentEntrance
+     * @return CurrentEntrance
      */
-    public void discoverNewTreasure(List<Explorer> explorers) {
-        if (explorers.isEmpty()) {
-            return;
-        }
-        this.lastDiscoveredTreasure = new Treasure();
-        lastDiscoveredTreasure.explore(explorers);
+    public CaveEntrance getCurrentEntrance() {
+        return currentEntrance;
     }
     
     /**
-     * Allow all player that will return to camp to see the path
-     * @param explorers List of explorer that want to return to camp
+     *Check if they is a entrance too be added
+     * @return true if less then 5
      */
-    public void returnToCamp(List<Explorer> explorers){
+    public boolean hasNewEntranceToExplore(){
+        return this.nbExploredEntrance < 5;
         
+    }
+    
+    /**
+     *Open a new entrance
+     * @throws GameException if 5 cave already open or last phase didn't end
+     */
+    public void openNewEntrance(){
+        if (!currentEntrance.isLockedOut()) {
+            throw new GameException("The last phase isn't over");
+        }
+        if(!hasNewEntranceToExplore()){
+            throw new GameException("You already have 5 cave open");
+        }
+        currentEntrance = new CaveEntrance();
+    }
+    
+    /**
+     *LockOut the currentEntrance
+     * @throws GameException if no game phase was found
+     */
+    public void lockOutCurrentEntrance(){
+        if (nbExploredEntrance == 5 && getCurrentEntrance().isLockedOut()) {
+            throw new GameException("No game phase in progress found");
+        }
+        currentEntrance.lockOut();
+        nbExploredEntrance ++;
     }
 }

@@ -2,6 +2,7 @@ package be.he2b.g45502.view;
 
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
+import be.he2b.g45502.model.Treasure;
 import java.util.Scanner;
 
 /**
@@ -97,6 +98,18 @@ public class View {
             System.out.println("Name : " + game.getWinner());
             System.out.println("Rubis : " + game.getWinner().getFortune());
     }
-
     
+    /**
+     * Display the path and the current state of all player
+     */
+    public void turnResumeDisplay(){
+            for (int i = 0; i < game.getCave().getCurrentEntrance().getPath().size(); i++) {
+                System.out.println("Treasure " + i + ": " + game.getCave().getCurrentEntrance().getPath().get(i));
+            }
+        for (Explorer explorer : game.getExplorers()) {
+            System.out.println("Explorer :" + explorer);
+            System.out.println("State :" + explorer.getState());
+        }
+    }
+
 }

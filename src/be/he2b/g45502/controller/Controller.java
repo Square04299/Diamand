@@ -52,6 +52,7 @@ public class Controller {
                     game.handleExplorerDecisionToLeave(explorer);
                 }
             }
+            game.makeExplorersLeave();
         }
         view.displayWinner();
     }
