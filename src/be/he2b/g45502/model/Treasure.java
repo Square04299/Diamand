@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author 45502
  */
-public class Treasure {
+public class Treasure implements Tile {
 
     private int rubies;
     private final int initNbRubies;
@@ -54,6 +54,7 @@ public class Treasure {
      *
      * @param explorers List of explorer
      */
+    @Override
     public void explore(List<Explorer> explorers) {
         if (!explorers.isEmpty()) {
             int rubiesPerExplorer = initNbRubies / explorers.size();

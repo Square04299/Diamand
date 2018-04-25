@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class CaveEntrance {
 
-    private Treasure lastDiscoveredTreasure;
-    private final List<Treasure> path;
+    private Tile lastDiscoveredTile;
+    private final List<Tile> path;
     private boolean lockedOut;
     private Cave cave;
 
@@ -41,7 +41,7 @@ public class CaveEntrance {
      * Get the List(path)
      * @return The path
      */
-    public List<Treasure> getPath() {
+    public List<Tile> getPath() {
         return path;
     }
 
@@ -50,8 +50,8 @@ public class CaveEntrance {
      *
      * @return return the new treasure created
      */
-    public Treasure getLastDiscoveredTreasure() {
-        return lastDiscoveredTreasure;
+    public Tile getLastDiscoveredTile() {
+        return lastDiscoveredTile;
     }
 
     /**
@@ -59,12 +59,12 @@ public class CaveEntrance {
      *
      * @param explorers list of player
      */
-    public void discoverNewTreasure(List<Explorer> explorers) {
+    public void discorverNewTile(List<Explorer> explorers) {
         if (explorers.isEmpty()) {
             return;
         }
-        this.lastDiscoveredTreasure = new Treasure();
-        lastDiscoveredTreasure.explore(explorers);
+        this.lastDiscoveredTile = cave.getDeck().getTile();
+        lastDiscoveredTile.explore(explorers);
     }
     
     /**
@@ -72,10 +72,10 @@ public class CaveEntrance {
      * @param explorers List of explorer that want to return to camp
      */
     public void returnToCamp(List<Explorer> explorers){
-        path.add(lastDiscoveredTreasure);
+        path.add(lastDiscoveredTile);
     }
     
-    void addTreasureToPath(Treasure treasure){
+    void addTileToPath(Treasure treasure){
         path.add(treasure);
     }
 }

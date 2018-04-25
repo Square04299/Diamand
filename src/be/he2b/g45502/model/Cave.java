@@ -14,6 +14,7 @@ public class Cave {
      */
     public Cave() {
         this.nbExploredEntrance = 0;
+        this.deck = new Deck();
     }
     
     public Deck getDeck() {

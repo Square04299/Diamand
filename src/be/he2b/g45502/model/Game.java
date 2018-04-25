@@ -32,7 +32,7 @@ public class Game implements Model {
 
     @Override
     public void moveForward() {
-        cave.getCurrentEntrance().discoverNewTreasure(getExploringExplorers());    
+        cave.getCurrentEntrance().discorverNewTile(getExploringExplorers());
     }
 
     @Override
@@ -68,13 +68,14 @@ public class Game implements Model {
         }
         explorer.takeDecisionToLeave();
     }
-    
+
     /**
-     *Check what is the last treasure you discord of the current entrance
+     * Check what is the last treasure you discord of the current entrance
+     *
      * @return the last treasure discovered
      */
-    public Treasure getLastDiscoveredTreasure() {
-        return cave.getCurrentEntrance().getLastDiscoveredTreasure();
+    public Tile getLastDiscoveredTreasure() {
+        return cave.getCurrentEntrance().getLastDiscoveredTile();
     }
 
     @Override
@@ -110,11 +111,11 @@ public class Game implements Model {
         }
         return getExplorers().get(valueI);
     }
-    
+
     @Override
     public void makeExplorersLeave() {
         for (Explorer explorer : getExplorers()) {
-            if(explorer.getState() == State.LEAVING){
+            if (explorer.getState() == State.LEAVING) {
                 explorer.reachCamp();
             }
         }
@@ -122,7 +123,7 @@ public class Game implements Model {
 
     @Override
     public void startNewExplorationPhase() {
-        
+
         if (!cave.hasNewEntranceToExplore()) {
             throw new GameException("You can't start a new exploration phase");
         }
@@ -135,6 +136,12 @@ public class Game implements Model {
     @Override
     public void endExplorationPhase() {
         cave.getCurrentEntrance().lockOut();
+        for (Tile tile : cave.getCurrentEntrance().getPath()) {
+            if (tile instanceof Treasure) {
+                ((Treasure) tile).restore();
+            }
+                cave.getDeck().putBack(tile);
+        }
     }
 
     @Override

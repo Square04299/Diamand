@@ -1,5 +1,6 @@
 package be.he2b.g45502.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,32 +8,29 @@ import java.util.List;
  * @author g45502
  */
 public class Deck {
-    private List<Treasure> tiles;
+    private List<Tile> tiles;
 
     public Deck() {
-        this.tiles.add(new Treasure(1));
-        this.tiles.add(new Treasure(2));
-        this.tiles.add(new Treasure(3));
-        this.tiles.add(new Treasure(4));
-        this.tiles.add(new Treasure(5));
-        this.tiles.add(new Treasure(5));
-        this.tiles.add(new Treasure(7));
-        this.tiles.add(new Treasure(7));
-        this.tiles.add(new Treasure(9));
-        this.tiles.add(new Treasure(11));
-        this.tiles.add(new Treasure(11));
-        this.tiles.add(new Treasure(13));
-        this.tiles.add(new Treasure(14));
-        this.tiles.add(new Treasure(15));
-        this.tiles.add(new Treasure(17));
+        this.tiles = new ArrayList<>();
+        int[] val = {1,2,3,4,5,5,7,7,9,11,11,13,14,15,17};
+        for(int i = 0; i < val.length; i++){
+            tiles.add(new Treasure(val[i]));
+        }
+        for (HazardType type : HazardType.values()) {
+            for (int i = 0; i < 3; i++) {
+                tiles.add(new Hazard(type));
+            }
+        }
     }
     
-    public Treasure getTreasure(){
-        int tile = (int) (Math.random() * (tiles.size()-1));
-        return tiles.get(tile);
+    public Tile getTile(){
+        int random = (int) (Math.random() * (tiles.size()-1));
+        Tile tile = tiles.get(random);
+        tiles.remove(random);
+        return tile;
     }
     
-    public void putBack(Treasure treasure){
-        treasure.restore();
+    public void putBack(Tile tile){
+        tiles.add(tile);
     }
 }

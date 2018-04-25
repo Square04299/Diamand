@@ -17,7 +17,7 @@ public class CaveEntranceTest {
         Explorer e1 = new Explorer("e1");
         Explorer e2 = new Explorer("e2");
         game.startNewExplorationPhase();
-        game.getCave().getCurrentEntrance().discoverNewTreasure(Arrays.asList(e1, e2));
+        game.getCave().getCurrentEntrance().discorverNewTile(Arrays.asList(e1, e2));
         assertTrue(e1.getBag().equals(e2.getBag()));
     }
 }
