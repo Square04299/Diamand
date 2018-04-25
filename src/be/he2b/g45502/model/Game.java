@@ -139,7 +139,7 @@ public class Game implements Model {
 
     @Override
     public boolean isOver() {
-        return !cave.hasNewEntranceToExplore();
+        return (!cave.hasNewEntranceToExplore());
     }
 
 }

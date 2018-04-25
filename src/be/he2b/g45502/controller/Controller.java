@@ -36,15 +36,15 @@ public class Controller {
 
         while (!game.isThereEnoughExplorer() || newExplorer) {
             game.addExplorer(view.askExplorer());
-            if (game.isItPossibleToAddExplorer()) {
+            if (game.isItPossibleToAddExplorer() && game.isThereEnoughExplorer()) {
                 newExplorer = view.isThereNewExplorerToAdd();
             } else {
                 newExplorer = false;
             }
         }
 
-        while (!game.isOver()) {
-            while (!game.isExplorationPhaseOver()) {
+        while (!game.isExplorationPhaseOver()) {
+            while (!game.isOver()) {
                 game.startNewExplorationPhase();
                 game.moveForward();
                 view.displayGame();
