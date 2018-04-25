@@ -17,10 +17,10 @@ public class CaveEntrance {
     /**
      *Contructor of the class CaveEntrave
      */
-    public CaveEntrance (){
+    public CaveEntrance (Cave cave){
         this.path = new ArrayList();
         this.lockedOut = false;
-        this.cave = new Cave();
+        this.cave = cave;
     }
 
     /**

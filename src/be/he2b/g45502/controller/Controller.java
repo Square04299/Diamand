@@ -43,9 +43,9 @@ public class Controller {
             }
         }
 
-        while (!game.isExplorationPhaseOver()) {
-            while (!game.isOver()) {
-                game.startNewExplorationPhase();
+        while (!game.isOver()) {
+            game.startNewExplorationPhase();
+            while (!game.isExplorationPhaseOver()) {
                 game.moveForward();
                 view.displayGame();
                 for (Explorer explorer : game.getExploringExplorers()) {
@@ -55,10 +55,8 @@ public class Controller {
                     }
                 }
                 game.makeExplorersLeave();
-                if (game.getExploringExplorers().isEmpty()) {
-                    game.endExplorationPhase();
-                }
             }
+            game.endExplorationPhase();
         }
         view.displayWinner();
     }

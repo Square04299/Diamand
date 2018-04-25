@@ -14,7 +14,6 @@ public class Cave {
      */
     public Cave() {
         this.nbExploredEntrance = 0;
-        this.currentEntrance = new CaveEntrance();
     }
     
     public Deck getDeck() {
@@ -57,7 +56,7 @@ public class Cave {
         if(!hasNewEntranceToExplore()){
             throw new GameException("You already have 5 cave open");
         }
-        this.currentEntrance = new CaveEntrance();
+        this.currentEntrance = new CaveEntrance(this);
     }
     
     /**
