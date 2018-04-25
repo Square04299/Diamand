@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Entrance of the cave
  *
  * @author 45502
  */
@@ -12,11 +13,13 @@ public class CaveEntrance {
     private Tile lastDiscoveredTile;
     private final List<Tile> path;
     private boolean lockedOut;
-    private Cave cave;
+    private final Cave cave;
     private boolean unsafe;
 
     /**
      * Contructor of the class CaveEntrave
+     *
+     * @param cave current cave
      */
     public CaveEntrance(Cave cave) {
         this.path = new ArrayList();
@@ -34,6 +37,11 @@ public class CaveEntrance {
         return lockedOut;
     }
 
+    /**
+     * Check if the cave is unsafe
+     *
+     * @return true if it's safe
+     */
     public boolean isUnsafe() {
         return unsafe;
     }

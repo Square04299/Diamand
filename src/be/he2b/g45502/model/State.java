@@ -9,17 +9,15 @@ package be.he2b.g45502.model;
 public enum State {
 
     /**
-     *Player is in the cave
+     * Player is in the cave
      */
     EXPLORING,
-
     /**
-     *Player wants to leave the cave
+     * Player wants to leave the cave
      */
     LEAVING,
-
     /**
-     *Player that left the cave and are on the camping
+     * Player that left the cave and are on the camping
      */
     CAMPING;
 }

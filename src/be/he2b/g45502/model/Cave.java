@@ -5,24 +5,31 @@ package be.he2b.g45502.model;
  * @author 45502
  */
 public class Cave {
+
     private int nbExploredEntrance;
     private CaveEntrance currentEntrance;
-    private Deck deck;
+    private final Deck deck;
 
     /**
-     *Controctor set the nbExploredEntrance to 0
+     * Controctor set the nbExploredEntrance to 0
      */
     public Cave() {
         this.nbExploredEntrance = 0;
         this.deck = new Deck();
     }
-    
+
+    /**
+     * Get deck
+     *
+     * @return the deck
+     */
     public Deck getDeck() {
         return this.deck;
     }
-    
+
     /**
-     *Get the amount of Cave explored
+     * Get the amount of Cave explored
+     *
      * @return amount of cave explored
      */
     public int getNbExploredEntrance() {
@@ -30,49 +37,58 @@ public class Cave {
     }
 
     /**
-     *Get the currentEntrance
+     * Get the currentEntrance
+     *
      * @return CurrentEntrance
      */
     public CaveEntrance getCurrentEntrance() {
         return currentEntrance;
     }
-    
+
     /**
-     *Check if they is a entrance too be added
+     * Check if they is a entrance too be added
+     *
      * @return true if less then 5
      */
-    public boolean hasNewEntranceToExplore(){
+    public boolean hasNewEntranceToExplore() {
         return this.nbExploredEntrance < 5;
-        
+
     }
-    
+
     /**
-     *Open a new entrance
+     * Open a new entrance
+     *
      * @throws GameException if 5 cave already open or last phase didn't end
      */
-    public void openNewEntrance(){
+    public void openNewEntrance() {
         if (this.currentEntrance != null && !this.currentEntrance.isLockedOut()) {
             throw new GameException("The last phase isn't over");
         }
-        if(!hasNewEntranceToExplore()){
+        if (!hasNewEntranceToExplore()) {
             throw new GameException("You already have 5 cave open");
         }
         this.currentEntrance = new CaveEntrance(this);
     }
-    
+
     /**
-     *LockOut the currentEntrance
+     * LockOut the currentEntrance
+     *
      * @throws GameException if no game phase was found
      */
-    public void lockOutCurrentEntrance(){
+    public void lockOutCurrentEntrance() {
         if (nbExploredEntrance == 5 && getCurrentEntrance().isLockedOut()) {
             throw new GameException("No game phase in progress found");
         }
         currentEntrance.lockOut();
-        this.nbExploredEntrance ++;
+        this.nbExploredEntrance++;
     }
-    
-    public boolean isLastEntranceUnsafe(){
+
+    /**
+     * chack if the last entrance is lockedout
+     *
+     * @return true if safe
+     */
+    public boolean isLastEntranceUnsafe() {
         return this.currentEntrance.isUnsafe();
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class Game implements Model {
 
     private final Cave cave;
-    private List<Explorer> explorers;
+    private final List<Explorer> explorers;
     private List<Explorer> exploringExplorers;
 
     /**
@@ -145,7 +145,7 @@ public class Game implements Model {
             if (tile instanceof Treasure) {
                 ((Treasure) tile).restore();
             }
-                cave.getDeck().putBack(tile);
+            cave.getDeck().putBack(tile);
         }
     }
 

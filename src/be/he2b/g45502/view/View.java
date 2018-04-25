@@ -85,12 +85,12 @@ public class View {
     public void displayGame() {
         if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
             System.out.println("Last treasure discovered : "
-                + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
-        }else{
+                    + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
+        } else {
             System.out.println("Last danger discovered : "
-                + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
+                    + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
         }
-        
+
         for (Explorer explorer : game.getExplorers()) {
             System.out.println(explorer.getPseudonym() + " : " + explorer.getNbRubies());
         }
@@ -102,24 +102,27 @@ public class View {
     public void displayWinner() {
         System.out.println("Thank you for playing");
         System.out.println("Winner");
-            System.out.println("Name : " + game.getWinner());
-            System.out.println("Rubis : " + game.getWinner().getFortune());
+        System.out.println("Name : " + game.getWinner());
+        System.out.println("Rubis : " + game.getWinner().getFortune());
     }
-    
+
     /**
      * Display the path and the current state of all player
      */
-    public void turnResumeDisplay(){
-            for (int i = 0; i < game.getCave().getCurrentEntrance().getPath().size(); i++) {
-                System.out.println("Treasure " + i + ": " + game.getCave().getCurrentEntrance().getPath().get(i));
-            }
+    public void turnResumeDisplay() {
+        for (int i = 0; i < game.getCave().getCurrentEntrance().getPath().size(); i++) {
+            System.out.println("Treasure " + i + ": " + game.getCave().getCurrentEntrance().getPath().get(i));
+        }
         for (Explorer explorer : game.getExplorers()) {
             System.out.println("Explorer :" + explorer);
             System.out.println("State :" + explorer.getState());
         }
     }
-    
-    public void displayRunAway(){
+
+    /**
+     * Display when you have incountered to many danger
+     */
+    public void displayRunAway() {
         System.out.println("The exploration has ended");
     }
 

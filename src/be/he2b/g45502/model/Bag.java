@@ -33,8 +33,11 @@ public class Bag {
     public int getNbRubies() {
         return nbRubies;
     }
-    
-    public void loseContent(){
+
+    /**
+     * Set the bad to 0 rubies
+     */
+    public void loseContent() {
         this.nbRubies = 0;
     }
 

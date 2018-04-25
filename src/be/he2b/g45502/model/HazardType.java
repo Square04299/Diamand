@@ -5,5 +5,25 @@ package be.he2b.g45502.model;
  * @author g44502
  */
 public enum HazardType {
-    STONE_BALL, GIANT_SPIDERS, SNAKES, BATTERING_RAM, LAVA_FIELD;
+
+    /**
+     * Danger tile
+     */
+    STONE_BALL,
+    /**
+     * Danger tile
+     */
+    GIANT_SPIDERS,
+    /**
+     * Danger tile
+     */
+    SNAKES,
+    /**
+     * Danger tile
+     */
+    BATTERING_RAM,
+    /**
+     * Danger tile
+     */
+    LAVA_FIELD;
 }

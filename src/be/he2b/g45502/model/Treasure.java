@@ -49,11 +49,6 @@ public class Treasure implements Tile {
         return initNbRubies;
     }
 
-    /**
-     * Add a equal amount of rubies to all explorer that are on the treasure
-     *
-     * @param explorers List of explorer
-     */
     @Override
     public void explore(List<Explorer> explorers) {
         if (!explorers.isEmpty()) {
@@ -73,7 +68,7 @@ public class Treasure implements Tile {
     /**
      * Reset the treasure to the initial amount
      */
-    public void restore(){
+    public void restore() {
         rubies = initNbRubies;
     }
 }

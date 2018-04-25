@@ -77,30 +77,34 @@ public class Explorer {
     public void takeDecisionToLeave() {
         this.state = State.LEAVING;
     }
-    
+
     /**
      * Get the amount of rubies of the explorer
+     *
      * @return The amount of rubies
      */
-    public int getFortune(){
+    public int getFortune() {
         return bag.getNbRubies();
     }
-    
+
     /**
      * Set the State of the explorer to camping
      */
-    public void reachCamp(){
+    public void reachCamp() {
         this.state = State.CAMPING;
     }
-    
+
     /**
-     *Change the state of explorer to
+     * Change the state of explorer to
      */
-    public void startExploration(){
+    public void startExploration() {
         this.state = State.EXPLORING;
     }
-    
-    public void runAway(){
+
+    /**
+     * Lose content of bag and go back to camp
+     */
+    public void runAway() {
         this.bag.loseContent();
         this.reachCamp();
     }

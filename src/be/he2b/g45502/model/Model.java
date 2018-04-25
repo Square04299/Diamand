@@ -86,37 +86,40 @@ public interface Model {
      * @return true If you can add a new player (explorer).
      */
     boolean isItPossibleToAddExplorer();
-    
+
     /**
      * Check the winner of the game
+     *
      * @return The explorer with the biggest Forturne
      * @exception GameException if it's called before the end of the game
      */
     Explorer getWinner();
-    
+
     /**
      * Make Explorer to leave the cave and go back to camp
      */
     void makeExplorersLeave();
-    
+
     /**
      * Create a new entrance to the cave change the state of explorer
      */
     void startNewExplorationPhase();
-    
+
     /**
      * End the exploration phase and lockout the current cave
      */
     void endExplorationPhase();
-    
+
     /**
      * Check if there is any Entrance that can be open
+     *
      * @return true if game is over
      */
     boolean isOver();
-    
+
     /**
      * Will check the saftey of the cave
+     *
      * @return true if cave is unsafe
      */
     boolean isExploreationPhaseAborted();
