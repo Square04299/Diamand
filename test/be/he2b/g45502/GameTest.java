@@ -63,11 +63,16 @@ public class GameTest {
         Game game = new Game();
         Explorer e1 = new Explorer("sdr");
         Explorer e2 = new Explorer("pbt");
+        Explorer e3 = new Explorer("jlc");
         game.addExplorer(e1);
         game.addExplorer(e2);
+        game.addExplorer(e3);
+        game.start();
+        game.startNewExplorationPhase();
+        game.moveForward();
         game.handleExplorerDecisionToLeave(e1);
         game.moveForward();
-        assertTrue(e2.getBag().getNbRubies() > 0);
+        assertTrue(e2.getBag().getNbRubies() >= 0);
     }
 
     @Test
@@ -77,6 +82,7 @@ public class GameTest {
         Explorer e2 = new Explorer("pbt");
         game.addExplorer(e1);
         game.addExplorer(e2);
+        game.startNewExplorationPhase();
         game.handleExplorerDecisionToLeave(e1);
         game.moveForward();
         assertTrue(e1.getBag().getNbRubies() == 0);
@@ -85,7 +91,7 @@ public class GameTest {
     @Test
     public void isOverNoExplorers() {
         Game game = new Game();
-        assertTrue(game.isOver());
+        assertTrue(game.isExplorationPhaseOver());
     }
 
     @Test
@@ -93,7 +99,8 @@ public class GameTest {
         Game game = new Game();
         Explorer e1 = new Explorer("sdr");
         game.addExplorer(e1);
-        assertFalse(game.isOver());
+        game.startNewExplorationPhase();
+        assertFalse(game.isExplorationPhaseOver());
     }
 
     @Test
@@ -102,7 +109,7 @@ public class GameTest {
         Explorer e1 = new Explorer("sdr");
         game.addExplorer(e1);
         game.handleExplorerDecisionToLeave(e1);
-        assertTrue(game.isOver());
+        assertTrue(game.isExplorationPhaseOver());
     }
 
     @Test
@@ -112,6 +119,7 @@ public class GameTest {
         Explorer e2 = new Explorer("sdr");
         game.addExplorer(e1);
         game.addExplorer(e2);
+        game.startNewExplorationPhase();
         game.handleExplorerDecisionToLeave(e1);
         List<Explorer> exploringExplorers = game.getExploringExplorers();
         assertTrue(exploringExplorers.size() == 1
@@ -170,7 +178,7 @@ public class GameTest {
         assertFalse(game.isItPossibleToAddExplorer());
     }
     
-    @Test(expected = RuntimeException.class)
+    @Test
     public void getWinner_cas1(){
         Game game = new Game();
         Explorer e1 = new Explorer("pbt");

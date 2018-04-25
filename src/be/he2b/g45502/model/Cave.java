@@ -7,6 +7,7 @@ package be.he2b.g45502.model;
 public class Cave {
     private int nbExploredEntrance;
     private CaveEntrance currentEntrance;
+    private Deck deck;
 
     /**
      *Controctor set the nbExploredEntrance to 0
@@ -15,7 +16,11 @@ public class Cave {
         this.nbExploredEntrance = 0;
         this.currentEntrance = new CaveEntrance();
     }
-
+    
+    public Deck getDeck() {
+        return this.deck;
+    }
+    
     /**
      *Get the amount of Cave explored
      * @return amount of cave explored
@@ -46,13 +51,13 @@ public class Cave {
      * @throws GameException if 5 cave already open or last phase didn't end
      */
     public void openNewEntrance(){
-        if (currentEntrance!=null && !currentEntrance.isLockedOut()) {
+        if (this.currentEntrance != null && !this.currentEntrance.isLockedOut()) {
             throw new GameException("The last phase isn't over");
         }
         if(!hasNewEntranceToExplore()){
             throw new GameException("You already have 5 cave open");
         }
-        currentEntrance = new CaveEntrance();
+        this.currentEntrance = new CaveEntrance();
     }
     
     /**
@@ -65,5 +70,5 @@ public class Cave {
         }
         currentEntrance.lockOut();
         nbExploredEntrance ++;
-    }
+    }  
 }

@@ -12,6 +12,7 @@ public class CaveEntrance {
     private Treasure lastDiscoveredTreasure;
     private final List<Treasure> path;
     private boolean lockedOut;
+    private Cave cave;
 
     /**
      *Contructor of the class CaveEntrave
@@ -19,6 +20,7 @@ public class CaveEntrance {
     public CaveEntrance (){
         this.path = new ArrayList();
         this.lockedOut = false;
+        this.cave = new Cave();
     }
 
     /**

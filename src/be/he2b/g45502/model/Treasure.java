@@ -69,4 +69,10 @@ public class Treasure {
         return "" + rubies;
     }
 
+    /**
+     * Reset the treasure to the initial amount
+     */
+    public void restore(){
+        rubies = initNbRubies;
+    }
 }

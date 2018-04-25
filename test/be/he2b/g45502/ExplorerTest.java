@@ -15,7 +15,7 @@ public class ExplorerTest {
     @Test
     public void getStateBeforeTakeDecisionToLeave() {
         Explorer explorer = new Explorer("Sdr");
-        assertEquals(State.EXPLORING, explorer.getState());
+        assertEquals(State.CAMPING, explorer.getState());
     }
 
     @Test

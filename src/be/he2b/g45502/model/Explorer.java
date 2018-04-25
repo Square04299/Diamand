@@ -94,7 +94,7 @@ public class Explorer {
     }
     
     /**
-     *Change the state of explorer to exploring
+     *Change the state of explorer to
      */
     public void startExploration(){
         this.state = State.EXPLORING;
