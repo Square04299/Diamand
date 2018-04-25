@@ -2,7 +2,6 @@ package be.he2b.g45502.view;
 
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
-import be.he2b.g45502.model.Treasure;
 import java.util.Scanner;
 
 /**
@@ -11,8 +10,8 @@ import java.util.Scanner;
  */
 public class View {
 
-    private Scanner in;
-    private Game game;
+    private final Scanner in;
+    private final Game game;
     private Explorer e;
 
     /**

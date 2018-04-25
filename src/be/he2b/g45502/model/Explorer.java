@@ -23,7 +23,7 @@ public class Explorer {
         }
         this.pseudonym = pseudonym;
         this.bag = new Bag();
-        this.state = State.EXPLORING;
+        this.state = State.CAMPING;
     }
 
     /**
@@ -91,6 +91,13 @@ public class Explorer {
      */
     public void reachCamp(){
         this.state = State.CAMPING;
+    }
+    
+    /**
+     *Change the state of explorer to exploring
+     */
+    public void startExploration(){
+        this.state = State.EXPLORING;
     }
 
     @Override

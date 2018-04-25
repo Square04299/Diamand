@@ -10,8 +10,8 @@ import be.he2b.g45502.view.View;
  */
 public class Controller {
 
-    private Game game;
-    private View view;
+    private final Game game;
+    private final View view;
     private boolean newExplorer;
     private boolean choiceToContinue;
 
@@ -34,25 +34,31 @@ public class Controller {
      */
     public void startGame() {
 
-        while (!game.isThereEnoughExplorer() || newExplorer ) {
+        while (!game.isThereEnoughExplorer() || newExplorer) {
             game.addExplorer(view.askExplorer());
             if (game.isItPossibleToAddExplorer()) {
                 newExplorer = view.isThereNewExplorerToAdd();
-            }else{
+            } else {
                 newExplorer = false;
             }
         }
 
         while (!game.isOver()) {
-            game.moveForward();
-            view.displayGame();
-            for (Explorer explorer : game.getExploringExplorers()) {
-                choiceToContinue = view.askExplorerChoiceToContinue(explorer);
-                if (!choiceToContinue) {
-                    game.handleExplorerDecisionToLeave(explorer);
+            while (!game.isExplorationPhaseOver()) {
+                game.startNewExplorationPhase();
+                game.moveForward();
+                view.displayGame();
+                for (Explorer explorer : game.getExploringExplorers()) {
+                    choiceToContinue = view.askExplorerChoiceToContinue(explorer);
+                    if (!choiceToContinue) {
+                        game.handleExplorerDecisionToLeave(explorer);
+                    }
+                }
+                game.makeExplorersLeave();
+                if (game.getExploringExplorers().isEmpty()) {
+                    game.endExplorationPhase();
                 }
             }
-            game.makeExplorersLeave();
         }
         view.displayWinner();
     }

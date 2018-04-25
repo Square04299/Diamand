@@ -10,7 +10,7 @@ import java.util.List;
 public class CaveEntrance {
 
     private Treasure lastDiscoveredTreasure;
-    private List<Treasure> path;
+    private final List<Treasure> path;
     private boolean lockedOut;
 
     /**

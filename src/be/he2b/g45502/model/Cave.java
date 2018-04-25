@@ -13,6 +13,7 @@ public class Cave {
      */
     public Cave() {
         this.nbExploredEntrance = 0;
+        this.currentEntrance = new CaveEntrance();
     }
 
     /**
@@ -45,7 +46,7 @@ public class Cave {
      * @throws GameException if 5 cave already open or last phase didn't end
      */
     public void openNewEntrance(){
-        if (!currentEntrance.isLockedOut()) {
+        if (currentEntrance!=null && !currentEntrance.isLockedOut()) {
             throw new GameException("The last phase isn't over");
         }
         if(!hasNewEntranceToExplore()){
