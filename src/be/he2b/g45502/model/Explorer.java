@@ -99,6 +99,11 @@ public class Explorer {
     public void startExploration(){
         this.state = State.EXPLORING;
     }
+    
+    public void runAway(){
+        this.bag.loseContent();
+        this.reachCamp();
+    }
 
     @Override
     public int hashCode() {

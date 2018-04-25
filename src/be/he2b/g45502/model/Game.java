@@ -10,7 +10,7 @@ import java.util.List;
 public class Game implements Model {
 
     private final Cave cave;
-    private final List<Explorer> explorers;
+    private List<Explorer> explorers;
     private List<Explorer> exploringExplorers;
 
     /**
@@ -33,6 +33,11 @@ public class Game implements Model {
     @Override
     public void moveForward() {
         cave.getCurrentEntrance().discorverNewTile(getExploringExplorers());
+        if (cave.getCurrentEntrance().isUnsafe()) {
+            for (Explorer explorer : getExploringExplorers()) {
+                explorer.runAway();
+            }
+        }
     }
 
     @Override
@@ -52,7 +57,7 @@ public class Game implements Model {
 
     @Override
     public List<Explorer> getExploringExplorers() {
-        exploringExplorers = new ArrayList<>();
+        List<Explorer> exploringExplorers = new ArrayList<>();
         for (Explorer explorer : explorers) {
             if (explorer.getState() == State.EXPLORING) {
                 exploringExplorers.add(explorer);
@@ -147,6 +152,11 @@ public class Game implements Model {
     @Override
     public boolean isOver() {
         return (!cave.hasNewEntranceToExplore());
+    }
+
+    @Override
+    public boolean isExploreationPhaseAborted() {
+        return cave.isLastEntranceUnsafe();
     }
 
 }

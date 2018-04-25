@@ -2,6 +2,8 @@ package be.he2b.g45502.view;
 
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
+import be.he2b.g45502.model.Hazard;
+import be.he2b.g45502.model.Treasure;
 import java.util.Scanner;
 
 /**
@@ -81,8 +83,14 @@ public class View {
      * each player own in they bags
      */
     public void displayGame() {
-        System.out.println("Last tile discovered : "
-                + game.getLastDiscoveredTreasure());
+        if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
+            System.out.println("Last treasure discovered : "
+                + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
+        }else{
+            System.out.println("Last danger discovered : "
+                + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
+        }
+        
         for (Explorer explorer : game.getExplorers()) {
             System.out.println(explorer.getPseudonym() + " : " + explorer.getNbRubies());
         }
@@ -109,6 +117,10 @@ public class View {
             System.out.println("Explorer :" + explorer);
             System.out.println("State :" + explorer.getState());
         }
+    }
+    
+    public void displayRunAway(){
+        System.out.println("The exploration has ended");
     }
 
 }

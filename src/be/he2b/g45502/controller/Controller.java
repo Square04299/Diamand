@@ -45,6 +45,9 @@ public class Controller {
 
         while (!game.isOver()) {
             game.startNewExplorationPhase();
+            System.out.println("-------------------");
+            System.out.println("Cave N°" + (game.getCave().getNbExploredEntrance() + 1));
+            System.out.println("-------------------");
             while (!game.isExplorationPhaseOver()) {
                 game.moveForward();
                 view.displayGame();
@@ -53,6 +56,9 @@ public class Controller {
                     if (!choiceToContinue) {
                         game.handleExplorerDecisionToLeave(explorer);
                     }
+                }
+                if (game.isExploreationPhaseAborted()) {
+                    view.displayRunAway();
                 }
                 game.makeExplorersLeave();
             }

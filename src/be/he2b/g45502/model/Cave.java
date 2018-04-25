@@ -69,6 +69,10 @@ public class Cave {
             throw new GameException("No game phase in progress found");
         }
         currentEntrance.lockOut();
-        nbExploredEntrance ++;
-    }  
+        this.nbExploredEntrance ++;
+    }
+    
+    public boolean isLastEntranceUnsafe(){
+        return this.currentEntrance.isUnsafe();
+    }
 }

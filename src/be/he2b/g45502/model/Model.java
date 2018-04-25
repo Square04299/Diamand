@@ -114,4 +114,10 @@ public interface Model {
      * @return true if game is over
      */
     boolean isOver();
+    
+    /**
+     * Will check the saftey of the cave
+     * @return true if cave is unsafe
+     */
+    boolean isExploreationPhaseAborted();
 }

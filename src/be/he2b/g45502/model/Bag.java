@@ -33,6 +33,10 @@ public class Bag {
     public int getNbRubies() {
         return nbRubies;
     }
+    
+    public void loseContent(){
+        this.nbRubies = 0;
+    }
 
     @Override
     public int hashCode() {
