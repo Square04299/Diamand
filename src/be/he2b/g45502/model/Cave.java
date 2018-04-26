@@ -84,7 +84,7 @@ public class Cave {
     }
 
     /**
-     * chack if the last entrance is lockedout
+     * check if the last entrance is lockedout
      *
      * @return true if safe
      */
