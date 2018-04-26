@@ -11,7 +11,6 @@ public class Game implements Model {
 
     private final Cave cave;
     private final List<Explorer> explorers;
-    private List<Explorer> exploringExplorers;
 
     /**
      * Contructor Game will create the cave and the list of player
@@ -140,7 +139,7 @@ public class Game implements Model {
 
     @Override
     public void endExplorationPhase() {
-        cave.getCurrentEntrance().lockOut();
+        cave.lockOutCurrentEntrance();
         for (Tile tile : cave.getCurrentEntrance().getPath()) {
             if (tile instanceof Treasure) {
                 ((Treasure) tile).restore();
