@@ -23,7 +23,7 @@ public class Explorer {
         }
         this.pseudonym = pseudonym;
         this.bag = new Bag();
-        this.state = State.EXPLORING;
+        this.state = State.CAMPING;
     }
 
     /**
@@ -47,19 +47,10 @@ public class Explorer {
     /**
      * Get the State
      *
-     * @return
+     * @return State of the player
      */
     public State getState() {
         return state;
-    }
-
-    /**
-     * Going to set the state of the explorer
-     *
-     * @param state New state he is going to be in
-     */
-    public void setState(State state) {
-        this.state = state;
     }
 
     /**
@@ -84,7 +75,38 @@ public class Explorer {
      * Set the State of the explorer to leave
      */
     public void takeDecisionToLeave() {
-        setState(State.LEAVING);
+        this.state = State.LEAVING;
+    }
+
+    /**
+     * Get the amount of rubies of the explorer
+     *
+     * @return The amount of rubies
+     */
+    public int getFortune() {
+        return bag.getNbRubies();
+    }
+
+    /**
+     * Set the State of the explorer to camping
+     */
+    public void reachCamp() {
+        this.state = State.CAMPING;
+    }
+
+    /**
+     * Change the state of explorer to
+     */
+    public void startExploration() {
+        this.state = State.EXPLORING;
+    }
+
+    /**
+     * Lose content of bag and go back to camp
+     */
+    public void runAway() {
+        this.bag.loseContent();
+        this.reachCamp();
     }
 
     @Override
@@ -115,5 +137,10 @@ public class Explorer {
             return false;
         }
         return this.state == other.state;
+    }
+
+    @Override
+    public String toString() {
+        return this.pseudonym;
     }
 }

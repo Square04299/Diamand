@@ -1,17 +1,15 @@
 package be.he2b.g45502.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author 45502
  */
-public class Treasure {
+public class Treasure implements Tile {
 
     private int rubies;
     private final int initNbRubies;
-    private List<Explorer> isExploring;
 
     /**
      * Constructor witout attribute Will generate a random number of rubies
@@ -51,23 +49,13 @@ public class Treasure {
         return initNbRubies;
     }
 
-    /**
-     * Add a equal amount of rubies to all explorer that are on the treasure
-     *
-     * @param explorers List of explorer
-     */
+    @Override
     public void explore(List<Explorer> explorers) {
         if (!explorers.isEmpty()) {
-            isExploring = new ArrayList<>();
-            for (Explorer explorer : explorers) {
-                if (explorer.getState() == State.EXPLORING) {
-                    isExploring.add(explorer);
-                }
-            }
-
-            rubies = initNbRubies % isExploring.size();
-            for (Explorer explorer : isExploring) {
-                explorer.addToBag(initNbRubies / isExploring.size());
+            int rubiesPerExplorer = initNbRubies / explorers.size();
+            this.rubies = this.initNbRubies % explorers.size();
+            for (int i = 0; i < explorers.size(); i++) {
+                explorers.get(i).addToBag(rubiesPerExplorer);
             }
         }
     }
@@ -77,4 +65,10 @@ public class Treasure {
         return "" + rubies;
     }
 
+    /**
+     * Reset the treasure to the initial amount
+     */
+    public void restore() {
+        rubies = initNbRubies;
+    }
 }

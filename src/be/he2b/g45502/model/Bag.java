@@ -34,6 +34,13 @@ public class Bag {
         return nbRubies;
     }
 
+    /**
+     * Set the bad to 0 rubies
+     */
+    public void loseContent() {
+        this.nbRubies = 0;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;

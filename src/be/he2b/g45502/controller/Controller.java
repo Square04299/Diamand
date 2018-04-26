@@ -10,8 +10,10 @@ import be.he2b.g45502.view.View;
  */
 public class Controller {
 
-    private Game game;
-    private View view;
+    private final Game game;
+    private final View view;
+    private boolean newExplorer;
+    private boolean choiceToContinue;
 
     /**
      * Contructor with attributes
@@ -22,6 +24,7 @@ public class Controller {
     public Controller(Game game, View view) {
         this.game = game;
         this.view = view;
+        this.newExplorer = true;
     }
 
     /**
@@ -30,25 +33,37 @@ public class Controller {
      * cave
      */
     public void startGame() {
-        boolean newExplorer = true;
-        boolean choiceToContinue;
 
-        while (newExplorer) {
+        while (!game.isThereEnoughExplorer() || newExplorer) {
             game.addExplorer(view.askExplorer());
-            newExplorer = view.isThereNewExplorerToAdd();
+            if (game.isItPossibleToAddExplorer() && game.isThereEnoughExplorer()) {
+                newExplorer = view.isThereNewExplorerToAdd();
+            } else {
+                newExplorer = false;
+            }
         }
 
         while (!game.isOver()) {
-            game.moveForward();
-            view.displayGame();
-            for (Explorer explorer : game.getExploringExplorers()) {
-                choiceToContinue = view.askExplorerChoiceToContinue(explorer);
-                if (!choiceToContinue) {
-                    game.handleExplorerDecisionToLeave(explorer);
+            game.startNewExplorationPhase();
+            view.getWhereAreExplorerCave();
+            while (!game.isExplorationPhaseOver() && !game.isExploreationPhaseAborted()) {
+                game.moveForward();
+                view.displayGame();
+                if (!game.isExploreationPhaseAborted()) {
+                    for (Explorer explorer : game.getExploringExplorers()) {
+                        choiceToContinue = view.askExplorerChoiceToContinue(explorer);
+                        if (!choiceToContinue) {
+                            game.handleExplorerDecisionToLeave(explorer);
+                        }
+                    }
                 }
+
+                game.makeExplorersLeave();
             }
+            view.displayRunAway();
+            game.endExplorationPhase();
         }
-        view.displayEnd();
+        view.displayWinner();
     }
 
 }

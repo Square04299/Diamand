@@ -2,6 +2,8 @@ package be.he2b.g45502.view;
 
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
+import be.he2b.g45502.model.Hazard;
+import be.he2b.g45502.model.Treasure;
 import java.util.Scanner;
 
 /**
@@ -10,14 +12,14 @@ import java.util.Scanner;
  */
 public class View {
 
-    private Scanner in;
-    private Game game;
+    private final Scanner in;
+    private final Game game;
     private Explorer e;
 
     /**
      * Create an other View with the model Game
      *
-     * @param game
+     * @param game instance of the game
      */
     public View(Game game) {
         this.in = new Scanner(System.in);
@@ -81,8 +83,14 @@ public class View {
      * each player own in they bags
      */
     public void displayGame() {
-        System.out.println("Last tile discovered : "
-                + game.getLastDiscoveredTreasure());
+        if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
+            System.out.println("Last treasure discovered : "
+                    + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
+        } else {
+            System.out.println("Last danger discovered : "
+                    + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
+        }
+
         for (Explorer explorer : game.getExplorers()) {
             System.out.println(explorer.getPseudonym() + " : " + explorer.getNbRubies());
         }
@@ -91,13 +99,40 @@ public class View {
     /**
      * Display the end screen with the total amount of rubies each player has
      */
-    public void displayEnd() {
+    public void displayWinner() {
         System.out.println("Thank you for playing");
-        System.out.println("Score");
-        for (Explorer explorer : game.getExplorers()) {
-            System.out.println("Name : " + explorer.getPseudonym());
-            System.out.println("Rubis : " + explorer.getNbRubies());
+        System.out.println("Winner");
+        System.out.println("Name : " + game.getWinner());
+        System.out.println("Rubis : " + game.getWinner().getFortune());
+    }
+
+    /**
+     * Display the path and the current state of all player
+     */
+    public void turnResumeDisplay() {
+        for (int i = 0; i < game.getCave().getCurrentEntrance().getPath().size(); i++) {
+            System.out.println("Treasure " + i + ": " + game.getCave().getCurrentEntrance().getPath().get(i));
         }
+        for (Explorer explorer : game.getExplorers()) {
+            System.out.println("Explorer :" + explorer);
+            System.out.println("State :" + explorer.getState());
+        }
+    }
+
+    /**
+     * Display when you have incountered to many danger
+     */
+    public void displayRunAway() {
+        System.out.println("The exploration has ended");
+    }
+
+    /**
+     * Display in with cave you are
+     */
+    public void getWhereAreExplorerCave() {
+        System.out.println("-------------------");
+        System.out.println("Cave N°" + (game.getCave().getNbExploredEntrance() + 1));
+        System.out.println("-------------------");
     }
 
 }

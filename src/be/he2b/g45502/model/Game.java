@@ -9,9 +9,8 @@ import java.util.List;
  */
 public class Game implements Model {
 
-    private Cave cave;
-    private List<Explorer> explorers;
-    private List<Explorer> exploringExplorers;
+    private final Cave cave;
+    private final List<Explorer> explorers;
 
     /**
      * Contructor Game will create the cave and the list of player
@@ -21,93 +20,142 @@ public class Game implements Model {
         this.explorers = new ArrayList();
     }
 
-    /**
-     * Add an explorer to a list of explorers
-     *
-     * @param explorer New explorer to add in the list
-     */
     @Override
     public void addExplorer(Explorer explorer) {
-        explorers.add(explorer);
+        if (getExplorers().size() < 8) {
+            explorers.add(explorer);
+        } else {
+            throw new GameException("Too much player");
+        }
     }
 
-    /**
-     * Move the explorer to the next treasure
-     */
     @Override
     public void moveForward() {
-        cave.discoverNewTreasure(getExploringExplorers());
-    }
-
-    /**
-     * Check if every explorer left the cave
-     *
-     * @return False if explorer are still in the cave
-     */
-    @Override
-    public boolean isOver() {
-        boolean isOver = true;
-        int i = 0;
-        while (isOver && i < explorers.size()) {
-            if (explorers.get(i).getState() == State.EXPLORING) {
-                isOver = false;
+        cave.getCurrentEntrance().discorverNewTile(getExploringExplorers());
+        if (cave.getCurrentEntrance().isUnsafe()) {
+            for (Explorer explorer : getExploringExplorers()) {
+                explorer.runAway();
             }
-            i++;
         }
-        return isOver;
     }
 
-    /**
-     * Get the current cave the explorer are in
-     *
-     * @return The cave
-     */
+    @Override
+    public boolean isExplorationPhaseOver() {
+        return getExploringExplorers().isEmpty();
+    }
+
     @Override
     public Cave getCave() {
         return cave;
     }
 
-    /**
-     * Get the list of explorers to the game
-     *
-     * @return the list of explorers
-     */
     @Override
     public List<Explorer> getExplorers() {
         return explorers;
     }
 
-    /**
-     * Get the list of explorers that are still exploring
-     *
-     * @return The explorer that are exploring
-     */
     @Override
     public List<Explorer> getExploringExplorers() {
-        exploringExplorers = new ArrayList<>();
-        for (int i = 0; i < explorers.size(); i++) {
-            if (explorers.get(i).getState() == State.EXPLORING) {
-                exploringExplorers.add(explorers.get(i));
+        List<Explorer> exploringExplorers = new ArrayList<>();
+        for (Explorer explorer : explorers) {
+            if (explorer.getState() == State.EXPLORING) {
+                exploringExplorers.add(explorer);
             }
         }
         return exploringExplorers;
     }
 
-    /**
-     * Change the state of the explorer to "LEAVING"
-     *
-     * @param explorer Name of the explorer that is taking the decision
-     */
     @Override
     public void handleExplorerDecisionToLeave(Explorer explorer) {
         if (explorers.isEmpty()) {
-            throw new RuntimeException();
+            throw new GameException();
         }
         explorer.takeDecisionToLeave();
     }
 
-    public Treasure getLastDiscoveredTreasure() {
-        return cave.getLastDiscoveredTreasure();
+    /**
+     * Check what is the last treasure you discord of the current entrance
+     *
+     * @return the last treasure discovered
+     */
+    public Tile getLastDiscoveredTreasure() {
+        return cave.getCurrentEntrance().getLastDiscoveredTile();
+    }
+
+    @Override
+    public void start() {
+        if (getExplorers().size() > 8) {
+            throw new GameException();
+        }
+    }
+
+    @Override
+    public boolean isThereEnoughExplorer() {
+        return getExplorers().size() >= 3;
+    }
+
+    @Override
+    public boolean isItPossibleToAddExplorer() {
+        return getExplorers().size() < 8;
+    }
+
+    @Override
+    public Explorer getWinner() {
+        int valueI = 0;
+        if (isExplorationPhaseOver()) {
+            int max = getExplorers().get(0).getFortune();
+            for (int i = 0; i < getExplorers().size(); i++) {
+                if (max < getExplorers().get(i).getFortune()) {
+                    max = getExplorers().get(i).getFortune();
+                    valueI = i;
+                }
+            }
+        } else {
+            throw new GameException("You can show the winner util you finish the game");
+        }
+        return getExplorers().get(valueI);
+    }
+
+    @Override
+    public void makeExplorersLeave() {
+        for (Explorer explorer : getExplorers()) {
+            if (explorer.getState() == State.LEAVING) {
+                explorer.reachCamp();
+            }
+        }
+    }
+
+    @Override
+    public void startNewExplorationPhase() {
+
+        if (!cave.hasNewEntranceToExplore()) {
+            throw new GameException("You can't start a new exploration phase");
+        }
+        cave.openNewEntrance();
+        for (Explorer explorer : explorers) {
+            explorer.startExploration();
+        }
+    }
+
+    @Override
+    public void endExplorationPhase() {
+        cave.lockOutCurrentEntrance();
+        for (Tile tile : cave.getCurrentEntrance().getPath()) {
+            if (tile instanceof Treasure) {
+                ((Treasure) tile).restore();
+            }
+            cave.getDeck().putBack(tile);
+        }
+    }
+
+    @Override
+    public boolean isOver() {
+        return (!cave.hasNewEntranceToExplore());
+    }
+
+    @Override
+    public boolean isExploreationPhaseAborted() {
+        return cave.isLastEntranceUnsafe();
     }
 
 }
