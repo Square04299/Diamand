@@ -47,7 +47,7 @@ public class Explorer {
     /**
      * Get the State
      *
-     * @return
+     * @return State of the player
      */
     public State getState() {
         return state;

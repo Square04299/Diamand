@@ -19,7 +19,7 @@ public class View {
     /**
      * Create an other View with the model Game
      *
-     * @param game
+     * @param game instance of the game
      */
     public View(Game game) {
         this.in = new Scanner(System.in);

@@ -14,7 +14,7 @@ public class Hazard implements Tile {
     /**
      * Constructor
      *
-     * @param type
+     * @param type Danger
      */
     public Hazard(HazardType type) {
         this.type = type;
