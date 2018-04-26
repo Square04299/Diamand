@@ -81,15 +81,18 @@ public class CaveEntrance {
             return;
         }
         this.lastDiscoveredTile = cave.getDeck().getTile();
-        lastDiscoveredTile.explore(explorers);
         if (this.lastDiscoveredTile instanceof Hazard) {
             for (Tile hazard : this.path) {
                 if (hazard instanceof Hazard) {
-                    if (((Hazard) hazard).getType() == ((Hazard) this.lastDiscoveredTile).getType()) {
+                    if (((Hazard) hazard).getType().equals(((Hazard) this.lastDiscoveredTile).getType())) {
                         unsafe = true;
                     }
                 }
             }
+        }
+        addTileToPath(this.lastDiscoveredTile);
+        if (this.lastDiscoveredTile instanceof Treasure){
+            lastDiscoveredTile.explore(explorers);
         }
     }
 
@@ -102,7 +105,7 @@ public class CaveEntrance {
         path.add(lastDiscoveredTile);
     }
 
-    void addTileToPath(Treasure treasure) {
-        path.add(treasure);
+    void addTileToPath(Tile tiles) {
+        path.add(tiles);
     }
 }

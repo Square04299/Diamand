@@ -126,4 +126,13 @@ public class View {
         System.out.println("The exploration has ended");
     }
 
+    /**
+     * Display in with cave you are
+     */
+    public void getWhereAreExplorerCave() {
+        System.out.println("-------------------");
+        System.out.println("Cave N°" + (game.getCave().getNbExploredEntrance() + 1));
+        System.out.println("-------------------");
+    }
+
 }

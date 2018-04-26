@@ -45,23 +45,22 @@ public class Controller {
 
         while (!game.isOver()) {
             game.startNewExplorationPhase();
-            System.out.println("-------------------");
-            System.out.println("Cave N°" + (game.getCave().getNbExploredEntrance() + 1));
-            System.out.println("-------------------");
-            while (!game.isExplorationPhaseOver()) {
+            view.getWhereAreExplorerCave();
+            while (!game.isExplorationPhaseOver() && !game.isExploreationPhaseAborted()) {
                 game.moveForward();
                 view.displayGame();
-                for (Explorer explorer : game.getExploringExplorers()) {
-                    choiceToContinue = view.askExplorerChoiceToContinue(explorer);
-                    if (!choiceToContinue) {
-                        game.handleExplorerDecisionToLeave(explorer);
+                if (!game.isExploreationPhaseAborted()) {
+                    for (Explorer explorer : game.getExploringExplorers()) {
+                        choiceToContinue = view.askExplorerChoiceToContinue(explorer);
+                        if (!choiceToContinue) {
+                            game.handleExplorerDecisionToLeave(explorer);
+                        }
                     }
                 }
-                if (game.isExploreationPhaseAborted()) {
-                    view.displayRunAway();
-                }
+
                 game.makeExplorersLeave();
             }
+            view.displayRunAway();
             game.endExplorationPhase();
         }
         view.displayWinner();
