@@ -108,4 +108,5 @@ public class CaveEntrance {
     void addTileToPath(Tile tiles) {
         path.add(tiles);
     }
+    
 }

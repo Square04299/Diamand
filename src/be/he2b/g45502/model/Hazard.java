@@ -32,4 +32,5 @@ public class Hazard implements Tile {
     @Override
     public void explore(List<Explorer> explorers) {
     }
+    
 }

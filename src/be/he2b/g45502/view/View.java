@@ -3,6 +3,7 @@ package be.he2b.g45502.view;
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
 import be.he2b.g45502.model.Hazard;
+import be.he2b.g45502.model.Tile;
 import be.he2b.g45502.model.Treasure;
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class View {
      * @return The name added
      */
     public Explorer askExplorer() {
-        System.out.println("Name of the new Explorer");
+        System.out.println(Color.toPurple("Name of the Explorer"));
         e = new Explorer(in.next());
         return e;
     }
@@ -43,14 +44,14 @@ public class View {
      * @return True if there is another player to add
      */
     public boolean isThereNewExplorerToAdd() {
-        System.out.println("Is there a new Explorer to add to the game");
-        System.out.println("\"YES\" or \"NO\"");
+        System.out.println(Color.toPurple("Want to add another player ?"));
         String response = in.next();
         String toUpperCase = response.toUpperCase();
 
         while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
-            System.out.println("The response need to be \"YES\" or \"NO\" !!");
-            System.out.println("Is there a new Explorer to add to the game");
+            System.out.println("");
+            System.out.println(Color.toRed("Answer either \"YES\" or \"NO\" "));
+            System.out.println("");
             response = in.next();
             toUpperCase = response.toUpperCase();
         }
@@ -64,15 +65,16 @@ public class View {
      * @return True if he wants to continue
      */
     public boolean askExplorerChoiceToContinue(Explorer explorer) {
-        System.out.println(explorer.getPseudonym() + " do you want to continue ?");
-        System.out.println("\"YES\" or \"NO\"");
+        System.out.println(Color.toBlue(explorer.getPseudonym() + " do you want to continue ?"));
         String response = in.next();
+        System.out.println("");
         String toUpperCase = response.toUpperCase();
 
         while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
-            System.out.println("The response need to be \"YES\" or \"NO\" !!");
-            System.out.println(explorer.getPseudonym() + " do you want to continue ?");
+            System.out.println(Color.toRed("Answer either \"YES\" or \"NO\" !!"));
+            System.out.println(Color.toBlue(explorer.getPseudonym() + " do you want to continue ?"));
             response = in.next();
+            System.out.println("");
             toUpperCase = response.toUpperCase();
         }
         return toUpperCase.contains("YES");
@@ -83,56 +85,57 @@ public class View {
      * each player own in they bags
      */
     public void displayGame() {
+        System.out.println(Color.toYellow("-------------------"));
+        System.out.println("");
         if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
-            System.out.println("Last treasure discovered : "
+            System.out.println(Color.toBlue("Last treasure discovered : ")
                     + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
         } else {
-            System.out.println("Last danger discovered : "
+            System.out.println(Color.toRed("Last danger discovered : ")
                     + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
         }
-
+        System.out.println("");
         for (Explorer explorer : game.getExplorers()) {
-            System.out.println(explorer.getPseudonym() + " : " + explorer.getNbRubies());
+            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getNbRubies() + " rubies"));
+            System.out.println(Color.toBlue("State :") + explorer.getState());
         }
+        System.out.println("");
     }
 
     /**
      * Display the end screen with the total amount of rubies each player has
      */
     public void displayWinner() {
+        System.out.println(Color.toGreen("Winner"));
+        System.out.println(Color.toGreen("Name : " + game.getWinner()));
+        System.out.println(Color.toPurple("Rubies : " + game.getWinner().getFortune()));
+        System.out.println("");
         System.out.println("Thank you for playing");
-        System.out.println("Winner");
-        System.out.println("Name : " + game.getWinner());
-        System.out.println("Rubis : " + game.getWinner().getFortune());
+        System.out.println("");
     }
 
     /**
      * Display the path and the current state of all player
      */
     public void turnResumeDisplay() {
-        for (int i = 0; i < game.getCave().getCurrentEntrance().getPath().size(); i++) {
-            System.out.println("Treasure " + i + ": " + game.getCave().getCurrentEntrance().getPath().get(i));
-        }
-        for (Explorer explorer : game.getExplorers()) {
-            System.out.println("Explorer :" + explorer);
-            System.out.println("State :" + explorer.getState());
-        }
+        System.out.print(game.getCave().getCurrentEntrance().getPath());
+
     }
 
     /**
      * Display when you have incountered to many danger
      */
     public void displayRunAway() {
-        System.out.println("The exploration has ended");
+        System.out.println(Color.toRed("The exploration has ended"));
+        System.out.println("");
     }
 
     /**
      * Display in with cave you are
      */
     public void getWhereAreExplorerCave() {
-        System.out.println("-------------------");
-        System.out.println("Cave N°" + (game.getCave().getNbExploredEntrance() + 1));
-        System.out.println("-------------------");
+        System.out.println(Color.toYellow("-------------------"));
+        System.out.println(Color.toYellow("Cave N°" + (game.getCave().getNbExploredEntrance() + 1)));
     }
 
 }
