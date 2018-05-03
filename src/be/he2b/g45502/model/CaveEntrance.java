@@ -86,6 +86,7 @@ public class CaveEntrance {
                 if (hazard instanceof Hazard) {
                     if (((Hazard) hazard).getType().equals(((Hazard) this.lastDiscoveredTile).getType())) {
                         unsafe = true;
+                        ((Hazard) hazard).escape();
                     }
                 }
             }

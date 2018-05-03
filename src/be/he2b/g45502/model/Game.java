@@ -140,12 +140,17 @@ public class Game implements Model {
     @Override
     public void endExplorationPhase() {
         cave.lockOutCurrentEntrance();
-        for (Tile tile : cave.getCurrentEntrance().getPath()) {
-            if (tile instanceof Treasure) {
-                ((Treasure) tile).restore();
-            }
-            cave.getDeck().putBack(tile);
+        Tile danger = cave.getCurrentEntrance().getLastDiscoveredTile();
+        if ((danger instanceof Hazard ) && !((Hazard) danger).isExlorersEscapeReason()) {
+                for (Tile tile : cave.getCurrentEntrance().getPath()) {
+                    if (tile instanceof Treasure) {
+                        ((Treasure) tile).restore();
+                    }
+                    cave.getDeck().putBack(tile);
+                }
+            
         }
+
     }
 
     @Override
