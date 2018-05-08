@@ -1,5 +1,6 @@
 package be.he2b.g45502.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,67 +9,65 @@ import java.util.List;
  */
 public class Treasure implements Tile {
 
-    private int rubies;
-    private final int initNbRubies;
-
-    /**
-     * Constructor witout attribute Will generate a random number of rubies
-     * between 1 and 15 to add to the treasure
-     */
-    public Treasure() {
-        this.rubies = (int) Math.ceil(Math.random() * 15);
-        this.initNbRubies = this.rubies;
-    }
+    private List<Gem> gems;
+    private final int initNbGems;
 
     /**
      * Constructor with attribute
      *
-     * @param rubies Fixed number of rubies in the Treasure
+     * @param rubies Fixed number of gems in the Treasure
      */
     public Treasure(int rubies) {
-        this.initNbRubies = rubies;
-        this.rubies = initNbRubies;
+        this.initNbGems = rubies;
+        this.gems = new ArrayList<>();
+        for (int i = 0; i < initNbGems; i++) {
+            gems.add(Gem.RUBY);
+        }
 
     }
 
     /**
-     * Get the amount of rubies in the treasure
+     * List of gems and return them
      *
-     * @return The amount of rubies in the treasure
+     * @return List of gems
      */
-    public int getRubies() {
-        return rubies;
+    public List<Gem> getGems() {
+        return gems;
     }
 
     /**
-     * Get the initial amount of rubies in the treasure
+     * Get the initial amount of gems in the treasure
      *
-     * @return The inital amount of rubies
+     * @return The inital amount of gems
      */
     public int getInitNbRubies() {
-        return initNbRubies;
+        return initNbGems;
     }
 
     @Override
     public void explore(List<Explorer> explorers) {
         if (!explorers.isEmpty()) {
-            int rubiesPerExplorer = initNbRubies / explorers.size();
-            this.rubies = this.initNbRubies % explorers.size();
-            for (int i = 0; i < explorers.size(); i++) {
-                explorers.get(i).addToBag(rubiesPerExplorer);
+            int rubiesPerExplorer = gems.size() / explorers.size();
+            for (Explorer explorer : explorers) {
+                for (int i = 0; i < rubiesPerExplorer; i++) {
+                    explorer.addToBag(gems.get(0));
+                    gems.remove(0);
+                }
             }
         }
     }
 
     @Override
     public String toString() {
-        return "" + rubies;
+        return "" + gems;
     }
 
     /**
      * Reset the treasure to the initial amount
      */
     public void restore() {
-        rubies = initNbRubies;
+        while (gems.size() < initNbGems) {
+            gems.add(Gem.RUBY);
+        }
     }
 }

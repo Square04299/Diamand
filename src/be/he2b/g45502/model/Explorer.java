@@ -54,21 +54,12 @@ public class Explorer {
     }
 
     /**
-     * Get the amount of rubies in the bag
-     *
-     * @return Nomber of rubies
-     */
-    public int getNbRubies() {
-        return bag.getNbRubies();
-    }
-
-    /**
      * Add a amount of rubbies to the bag
      *
-     * @param nbRubies Number of rubies to add
+     * @param gem Number of gem to add
      */
-    public void addToBag(int nbRubies) {
-        bag.addRubies(nbRubies);
+    public void addToBag(Gem gem) {
+        bag.addGems(gem);
     }
 
     /**
@@ -84,7 +75,7 @@ public class Explorer {
      * @return The amount of rubies
      */
     public int getFortune() {
-        return bag.getNbRubies();
+        return bag.getValue();
     }
 
     /**

@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/controller/Controller.java</file>
-            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/diamond/Main.java</file>
-            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Cave.java</file>
-            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/view/View.java</file>
-            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Game.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Deck.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Gem.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Bag.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/CaveEntrance.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Explorer.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Treasure.java</file>
+            <file>file:/Users/square/NetBeansProjects/Diamant/src/be/he2b/g45502/model/Relic.java</file>
         </group>
     </open-files>
 </project-private>

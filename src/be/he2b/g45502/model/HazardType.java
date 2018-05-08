@@ -1,7 +1,7 @@
 package be.he2b.g45502.model;
 
 /**
- *
+ *List of danger found in the cave
  * @author g44502
  */
 public enum HazardType {

@@ -96,7 +96,7 @@ public class View {
         }
         System.out.println("");
         for (Explorer explorer : game.getExplorers()) {
-            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getNbRubies() + " rubies"));
+            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getFortune() + " rubies"));
             System.out.println(Color.toBlue("State :") + explorer.getState());
         }
         System.out.println("");
