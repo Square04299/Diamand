@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class Bag {
 
-    private List<Gem> gems;
+    protected List<Gem> gems;
 
     /**
      * Contructor with no attribute Will initialise the amount of gems

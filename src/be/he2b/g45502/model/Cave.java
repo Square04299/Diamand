@@ -9,6 +9,7 @@ public class Cave {
     private int nbExploredEntrance;
     private CaveEntrance currentEntrance;
     private final Deck deck;
+    private int nbTakenRelics;
 
     /**
      * Controctor set the nbExploredEntrance to 0
@@ -16,6 +17,11 @@ public class Cave {
     public Cave() {
         this.nbExploredEntrance = 0;
         this.deck = new Deck();
+        this.nbTakenRelics = 0;
+    }
+
+    public int getNbTakenRelics() {
+        return nbTakenRelics;
     }
 
     /**
@@ -90,5 +96,9 @@ public class Cave {
      */
     public boolean isLastEntranceUnsafe() {
         return this.currentEntrance.isUnsafe();
+    }
+    
+    public void incrementNbTakenRelics(){
+        this.nbTakenRelics ++;
     }
 }

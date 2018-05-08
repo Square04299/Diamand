@@ -70,4 +70,9 @@ public class Treasure implements Tile {
             gems.add(Gem.RUBY);
         }
     }
+    
+    public void transferGemsFrom(Treasure o){
+        this.gems.addAll(o.gems);
+        o.gems.clear();
+    }
 }

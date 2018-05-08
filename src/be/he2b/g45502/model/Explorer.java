@@ -11,6 +11,7 @@ public class Explorer {
     private String pseudonym;
     private Bag bag;
     private State state;
+    private Chest chest;
 
     /**
      * Constructor with attribute
@@ -24,6 +25,7 @@ public class Explorer {
         this.pseudonym = pseudonym;
         this.bag = new Bag();
         this.state = State.CAMPING;
+        this.chest = new Chest();
     }
 
     /**
@@ -83,6 +85,7 @@ public class Explorer {
      */
     public void reachCamp() {
         this.state = State.CAMPING;
+        this.chest.saveBag(this.bag);
     }
 
     /**
@@ -128,10 +131,5 @@ public class Explorer {
             return false;
         }
         return this.state == other.state;
-    }
-
-    @Override
-    public String toString() {
-        return this.pseudonym;
     }
 }

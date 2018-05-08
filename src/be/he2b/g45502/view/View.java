@@ -90,9 +90,11 @@ public class View {
         if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
             System.out.println(Color.toBlue("Last treasure discovered : ")
                     + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
-        } else {
+        } else if(game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Hazard){
             System.out.println(Color.toRed("Last danger discovered : ")
                     + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
+        } else{
+            System.out.println(Color.toGreen("Discovered relic"));
         }
         System.out.println("");
         for (Explorer explorer : game.getExplorers()) {

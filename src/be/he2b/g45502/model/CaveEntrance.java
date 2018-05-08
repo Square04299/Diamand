@@ -15,6 +15,8 @@ public class CaveEntrance {
     private boolean lockedOut;
     private final Cave cave;
     private boolean unsafe;
+    private boolean treasureFound;
+    private Treasure firstTreasureTile;
 
     /**
      * Contructor of the class CaveEntrave
@@ -26,6 +28,7 @@ public class CaveEntrance {
         this.lockedOut = false;
         this.cave = cave;
         this.unsafe = false;
+        this.treasureFound = false;
     }
 
     /**
@@ -90,9 +93,14 @@ public class CaveEntrance {
                     }
                 }
             }
+        } else if (this.lastDiscoveredTile instanceof Relic) {
+            this.cave.incrementNbTakenRelics();
+            ((Relic)this.lastDiscoveredTile).convertGemValue(this.cave.getNbTakenRelics());
         }
         addTileToPath(this.lastDiscoveredTile);
-        if (this.lastDiscoveredTile instanceof Treasure){
+        if (this.lastDiscoveredTile instanceof Treasure) {
+            this.treasureFound = true;
+            this.firstTreasureTile = ((Treasure)this.lastDiscoveredTile);
             lastDiscoveredTile.explore(explorers);
         }
     }
@@ -110,4 +118,10 @@ public class CaveEntrance {
         path.add(tiles);
     }
     
+    public void makeLastTileExplored(){
+        if (this.lastDiscoveredTile instanceof Treasure && !this.firstTreasureTile.equals(this.lastDiscoveredTile)) {
+            this.firstTreasureTile.transferGemsFrom((Treasure)this.lastDiscoveredTile);
+        }
+    }
+
 }

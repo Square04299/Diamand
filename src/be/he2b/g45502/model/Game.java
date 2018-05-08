@@ -118,6 +118,7 @@ public class Game implements Model {
 
     @Override
     public void makeExplorersLeave() {
+        this.cave.getCurrentEntrance().makeLastTileExplored();
         for (Explorer explorer : getExplorers()) {
             if (explorer.getState() == State.LEAVING) {
                 explorer.reachCamp();
