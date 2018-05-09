@@ -10,6 +10,9 @@ public class Relic implements Tile {
 
     private int valueInDiamonds;
 
+    /**
+     * Construtor of the class Relic will initialiser valueInDiamond to 1
+     */
     public Relic() {
         this.valueInDiamonds = 1;
     }
@@ -34,6 +37,11 @@ public class Relic implements Tile {
         return explorers.size() == 1 && explorers.get(0).getState().equals(State.LEAVING);
     }
 
+    /**
+     * Will chane the value of the diamond
+     *
+     * @param nbTakenRelics amount of relic found
+     */
     public void convertGemValue(int nbTakenRelics) {
         if (nbTakenRelics >= 3) {
             this.valueInDiamonds = 2;

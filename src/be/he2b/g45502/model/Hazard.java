@@ -33,18 +33,22 @@ public class Hazard implements Tile {
 
     /**
      * Check with danger will make the explorers leave the cave
+     *
      * @return true if the danger makes the player leave
      */
     public boolean isExlorersEscapeReason() {
         return exlorersEscapeReason;
     }
-    
-    public void escape(){
+
+    /**
+     * Change the variable exlorersEscapeReason to true
+     */
+    public void escape() {
         exlorersEscapeReason = true;
     }
 
     @Override
     public void explore(List<Explorer> explorers) {
     }
-    
+
 }

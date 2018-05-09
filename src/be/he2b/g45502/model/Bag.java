@@ -10,6 +10,9 @@ import java.util.Objects;
  */
 public class Bag {
 
+    /**
+     * Make the variable available for the child
+     */
     protected List<Gem> gems;
 
     /**
@@ -43,8 +46,13 @@ public class Bag {
     public void loseContent() {
         this.gems.clear();
     }
-    
-    public int getValue(){
+
+    /**
+     * Calculate the total amount of gems in the back
+     *
+     * @return sum of the gems in the bag
+     */
+    public int getValue() {
         int somme = 0;
         for (Gem gem : gems) {
             somme += gem.getValue();
@@ -71,11 +79,7 @@ public class Bag {
             return false;
         }
         final Bag other = (Bag) obj;
-        if (!Objects.equals(this.gems, other.gems)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.gems, other.gems);
     }
 
-    
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Treasure implements Tile {
 
-    private List<Gem> gems;
+    private final List<Gem> gems;
     private final int initNbGems;
 
     /**
@@ -70,8 +70,13 @@ public class Treasure implements Tile {
             gems.add(Gem.RUBY);
         }
     }
-    
-    public void transferGemsFrom(Treasure o){
+
+    /**
+     * Add all your gems to your bag
+     *
+     * @param o
+     */
+    public void transferGemsFrom(Treasure o) {
         this.gems.addAll(o.gems);
         o.gems.clear();
     }

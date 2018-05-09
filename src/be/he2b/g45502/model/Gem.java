@@ -1,18 +1,18 @@
 package be.he2b.g45502.model;
 
 /**
- *Types of relic
+ * Types of relic
+ *
  * @author square
  */
 public enum Gem {
 
     /**
-     *Relic type ruby
+     * Relic type ruby
      */
     RUBY(1),
-
     /**
-     *Relic type diamond
+     * Relic type diamond
      */
     DIAMOND(5);
 
@@ -23,11 +23,12 @@ public enum Gem {
     }
 
     /**
-     *Get the value of the Gem
+     * Get the value of the Gem
+     *
      * @return Value of the Gem
      */
     public int getValue() {
         return value;
     }
-    
+
 }

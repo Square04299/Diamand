@@ -53,7 +53,7 @@ public class CaveEntrance {
      * Set the value of lockOut to true
      */
     public void lockOut() {
-        lockedOut = true;
+        this.lockedOut = true;
     }
 
     /**
@@ -95,12 +95,12 @@ public class CaveEntrance {
             }
         } else if (this.lastDiscoveredTile instanceof Relic) {
             this.cave.incrementNbTakenRelics();
-            ((Relic)this.lastDiscoveredTile).convertGemValue(this.cave.getNbTakenRelics());
+            ((Relic) this.lastDiscoveredTile).convertGemValue(this.cave.getNbTakenRelics());
         }
         addTileToPath(this.lastDiscoveredTile);
         if (this.lastDiscoveredTile instanceof Treasure) {
             this.treasureFound = true;
-            this.firstTreasureTile = ((Treasure)this.lastDiscoveredTile);
+            this.firstTreasureTile = ((Treasure) this.lastDiscoveredTile);
             lastDiscoveredTile.explore(explorers);
         }
         path.add(lastDiscoveredTile);
@@ -112,10 +112,10 @@ public class CaveEntrance {
      * @param explorers List of explorer that want to return to camp
      */
     public void returnToCamp(List<Explorer> explorers) {
-        for (Tile tile: path) {
+        for (Tile tile : path) {
             if (tile instanceof Treasure) {
                 tile.explore(explorers);
-            }else if (tile instanceof Relic && ((Relic) tile).canBeTaken(explorers)) {
+            } else if (tile instanceof Relic && ((Relic) tile).canBeTaken(explorers)) {
                 tile.explore(explorers);
                 path.remove(tile);
             }
@@ -125,10 +125,13 @@ public class CaveEntrance {
     void addTileToPath(Tile tiles) {
         path.add(tiles);
     }
-    
-    public void makeLastTileExplored(){
+
+    /**
+     * Will take the last treasure discovered and put it on the first one
+     */
+    public void makeLastTileExplored() {
         if (this.lastDiscoveredTile instanceof Treasure && !this.firstTreasureTile.equals(this.lastDiscoveredTile)) {
-            this.firstTreasureTile.transferGemsFrom((Treasure)this.lastDiscoveredTile);
+            this.firstTreasureTile.transferGemsFrom((Treasure) this.lastDiscoveredTile);
         }
     }
 

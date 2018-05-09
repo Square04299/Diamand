@@ -51,8 +51,8 @@ public class Deck {
     public void putBack(Tile tile) {
         tiles.add(tile);
     }
-    
-    void tileList(){
-        
+
+    void tileList() {
+
     }
 }

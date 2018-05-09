@@ -28,10 +28,14 @@ public class Explorer {
         this.chest = new Chest();
     }
 
+    /**
+     * Getter of the variable chest
+     *
+     * @return
+     */
     public Chest getChest() {
         return chest;
     }
-    
 
     /**
      * Get the name of the player

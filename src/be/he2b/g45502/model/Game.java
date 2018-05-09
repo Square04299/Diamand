@@ -11,6 +11,8 @@ public class Game implements Model {
 
     private final Cave cave;
     private final List<Explorer> explorers;
+    private final int MAXPLAYER;
+    private final int MINPLAYER;
 
     /**
      * Contructor Game will create the cave and the list of player
@@ -18,11 +20,13 @@ public class Game implements Model {
     public Game() {
         this.cave = new Cave();
         this.explorers = new ArrayList();
+        this.MAXPLAYER = 8;
+        this.MINPLAYER = 3;
     }
 
     @Override
     public void addExplorer(Explorer explorer) {
-        if (getExplorers().size() < 8) {
+        if (getExplorers().size() < MAXPLAYER) {
             explorers.add(explorer);
         } else {
             throw new GameException("Too much player");
@@ -84,19 +88,19 @@ public class Game implements Model {
 
     @Override
     public void start() {
-        if (getExplorers().size() > 8) {
+        if (getExplorers().size() > MAXPLAYER) {
             throw new GameException();
         }
     }
 
     @Override
     public boolean isThereEnoughExplorer() {
-        return getExplorers().size() >= 3;
+        return getExplorers().size() >= MINPLAYER;
     }
 
     @Override
     public boolean isItPossibleToAddExplorer() {
-        return getExplorers().size() < 8;
+        return getExplorers().size() < MAXPLAYER;
     }
 
     @Override
@@ -149,14 +153,14 @@ public class Game implements Model {
     public void endExplorationPhase() {
         cave.lockOutCurrentEntrance();
         Tile danger = cave.getCurrentEntrance().getLastDiscoveredTile();
-        if ((danger instanceof Hazard ) && !((Hazard) danger).isExlorersEscapeReason()) {
-                for (Tile tile : cave.getCurrentEntrance().getPath()) {
-                    if (tile instanceof Treasure) {
-                        ((Treasure) tile).restore();
-                    }
-                    cave.getDeck().putBack(tile);
+        if ((danger instanceof Hazard) && !((Hazard) danger).isExlorersEscapeReason()) {
+            for (Tile tile : cave.getCurrentEntrance().getPath()) {
+                if (tile instanceof Treasure) {
+                    ((Treasure) tile).restore();
                 }
-            
+                cave.getDeck().putBack(tile);
+            }
+
         }
 
     }

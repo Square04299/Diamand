@@ -3,11 +3,12 @@ package be.he2b.g45502.view;
 import be.he2b.g45502.model.Explorer;
 import be.he2b.g45502.model.Game;
 import be.he2b.g45502.model.Hazard;
-import be.he2b.g45502.model.Tile;
 import be.he2b.g45502.model.Treasure;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
+ * What the player will see
  *
  * @author 45502
  */
@@ -46,14 +47,14 @@ public class View {
     public boolean isThereNewExplorerToAdd() {
         System.out.println(Color.toPurple("Want to add another player ?"));
         String response = in.next();
-        String toUpperCase = response.toUpperCase();
+        String toUpperCase = response.toUpperCase(Locale.ENGLISH);
 
         while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
             System.out.println("");
             System.out.println(Color.toRed("Answer either \"YES\" or \"NO\" "));
             System.out.println("");
             response = in.next();
-            toUpperCase = response.toUpperCase();
+            toUpperCase = response.toUpperCase(Locale.ENGLISH);
         }
         return toUpperCase.equals("YES");
     }
@@ -68,14 +69,14 @@ public class View {
         System.out.println(Color.toBlue(explorer.getPseudonym() + " do you want to continue ?"));
         String response = in.next();
         System.out.println("");
-        String toUpperCase = response.toUpperCase();
+        String toUpperCase = response.toUpperCase(Locale.ENGLISH);
 
         while (!toUpperCase.equals("YES") && !toUpperCase.equals("NO")) {
             System.out.println(Color.toRed("Answer either \"YES\" or \"NO\" !!"));
             System.out.println(Color.toBlue(explorer.getPseudonym() + " do you want to continue ?"));
             response = in.next();
             System.out.println("");
-            toUpperCase = response.toUpperCase();
+            toUpperCase = response.toUpperCase(Locale.ENGLISH);
         }
         return toUpperCase.contains("YES");
     }
@@ -87,22 +88,43 @@ public class View {
     public void displayGame() {
         System.out.println(Color.toYellow("-------------------"));
         System.out.println("");
+        displayFoundTile();
+        displayPath();
+        System.out.println("");
+        displayPlayerInfo();
+        System.out.println("");
+    }
+
+    /**
+     * Display what type of tile the player found
+     */
+    public void displayFoundTile() {
         if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Treasure) {
             System.out.println(Color.toBlue("Last treasure discovered : ")
                     + ((Treasure) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getInitNbRubies());
-        } else if(game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Hazard){
+        } else if (game.getCave().getCurrentEntrance().getLastDiscoveredTile() instanceof Hazard) {
             System.out.println(Color.toRed("Last danger discovered : ")
                     + ((Hazard) game.getCave().getCurrentEntrance().getLastDiscoveredTile()).getType());
-        } else{
+        } else {
             System.out.println(Color.toGreen("Discovered relic"));
         }
-        System.out.println("");
+    }
+    
+    public void displayPath(){
+        System.out.println(Color.toBlue("Path : " + game.getCave().getCurrentEntrance().getPath()));
+    }
+
+    /**
+     * Display the name, rubies in bag, rubies in chest and the state of all the
+     * player
+     */
+    public void displayPlayerInfo() {
         for (Explorer explorer : game.getExplorers()) {
-            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getFortune() + " rubies in bag"));
-            System.out.println(Color.toPurple(explorer.getChest().getValue() + " rubies in chest"));
-            System.out.println(Color.toBlue("State :") + explorer.getState());
+            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : ");
+            System.out.println(Color.toBlue("Bag : ") + Color.toPurple(explorer.getFortune() + " rubies"));
+            System.out.println(Color.toBlue("Chest : ") + Color.toPurple(explorer.getChest().getValue() + " rubies"));
+            System.out.println(Color.toBlue("State : ") + explorer.getState());
         }
-        System.out.println("");
     }
 
     /**
@@ -110,8 +132,8 @@ public class View {
      */
     public void displayWinner() {
         System.out.println(Color.toGreen("Winner"));
-        System.out.println(Color.toGreen("Name : " + game.getWinner().getPseudonym()));
-        System.out.println(Color.toPurple("Rubies : " + game.getWinner().getFortune()));
+        System.out.println(Color.toGreen("Name : ") + game.getWinner().getPseudonym());
+        System.out.println(Color.toPurple("Rubies (Chest) : " + game.getWinner().getChest().getValue()));
         System.out.println("");
         System.out.println("Thank you for playing");
         System.out.println("");
