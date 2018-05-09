@@ -103,6 +103,7 @@ public class CaveEntrance {
             this.firstTreasureTile = ((Treasure)this.lastDiscoveredTile);
             lastDiscoveredTile.explore(explorers);
         }
+        path.add(lastDiscoveredTile);
     }
 
     /**
@@ -111,7 +112,14 @@ public class CaveEntrance {
      * @param explorers List of explorer that want to return to camp
      */
     public void returnToCamp(List<Explorer> explorers) {
-        path.add(lastDiscoveredTile);
+        for (Tile tile: path) {
+            if (tile instanceof Treasure) {
+                tile.explore(explorers);
+            }else if (tile instanceof Relic && ((Relic) tile).canBeTaken(explorers)) {
+                tile.explore(explorers);
+                path.remove(tile);
+            }
+        }
     }
 
     void addTileToPath(Tile tiles) {

@@ -98,7 +98,8 @@ public class View {
         }
         System.out.println("");
         for (Explorer explorer : game.getExplorers()) {
-            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getFortune() + " rubies"));
+            System.out.println(Color.toGreen(explorer.getPseudonym()) + " : " + Color.toPurple(explorer.getFortune() + " rubies in bag"));
+            System.out.println(Color.toPurple(explorer.getChest().getValue() + " rubies in chest"));
             System.out.println(Color.toBlue("State :") + explorer.getState());
         }
         System.out.println("");
@@ -109,7 +110,7 @@ public class View {
      */
     public void displayWinner() {
         System.out.println(Color.toGreen("Winner"));
-        System.out.println(Color.toGreen("Name : " + game.getWinner()));
+        System.out.println(Color.toGreen("Name : " + game.getWinner().getPseudonym()));
         System.out.println(Color.toPurple("Rubies : " + game.getWinner().getFortune()));
         System.out.println("");
         System.out.println("Thank you for playing");

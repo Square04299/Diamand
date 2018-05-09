@@ -28,6 +28,11 @@ public class Explorer {
         this.chest = new Chest();
     }
 
+    public Chest getChest() {
+        return chest;
+    }
+    
+
     /**
      * Get the name of the player
      *
@@ -86,6 +91,7 @@ public class Explorer {
     public void reachCamp() {
         this.state = State.CAMPING;
         this.chest.saveBag(this.bag);
+        this.bag.gems.clear();
     }
 
     /**
