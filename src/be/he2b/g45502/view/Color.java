@@ -4,7 +4,6 @@ package be.he2b.g45502.view;
  * Cette classe permet l'écriture d'un texte coloré 4/11/2104 - Ajout d'un main
  * - MCD
  */
-
 public class Color {
 
     /**

@@ -89,7 +89,6 @@ public class View {
         System.out.println(Color.toYellow("-------------------"));
         System.out.println("");
         displayFoundTile();
-        displayPath();
         System.out.println("");
         displayPlayerInfo();
         System.out.println("");
@@ -108,10 +107,6 @@ public class View {
         } else {
             System.out.println(Color.toGreen("Discovered relic"));
         }
-    }
-    
-    public void displayPath(){
-        System.out.println(Color.toBlue("Path : " + game.getCave().getCurrentEntrance().getPath()));
     }
 
     /**

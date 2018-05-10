@@ -10,7 +10,7 @@ import java.util.List;
 public class Hazard implements Tile {
 
     private final HazardType type;
-    private boolean exlorersEscapeReason;
+    private boolean explorersEscapeReason;
 
     /**
      * Constructor
@@ -19,7 +19,7 @@ public class Hazard implements Tile {
      */
     public Hazard(HazardType type) {
         this.type = type;
-        this.exlorersEscapeReason = false;
+        this.explorersEscapeReason = false;
     }
 
     /**
@@ -36,15 +36,15 @@ public class Hazard implements Tile {
      *
      * @return true if the danger makes the player leave
      */
-    public boolean isExlorersEscapeReason() {
-        return exlorersEscapeReason;
+    public boolean isExplorersEscapeReason() {
+        return explorersEscapeReason;
     }
 
     /**
-     * Change the variable exlorersEscapeReason to true
+     * Change the variable explorersEscapeReason to true
      */
     public void escape() {
-        exlorersEscapeReason = true;
+        explorersEscapeReason = true;
     }
 
     @Override
