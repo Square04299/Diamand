@@ -53,6 +53,11 @@ public class Treasure implements Tile {
                     explorer.addToBag(gems.get(0));
                     gems.remove(0);
                 }
+//                for (Gem gemGive : gems) {
+//                    explorer.addToBag(gemGive);
+//                    gems.remove(gemGive);
+//                }
+                
             }
         }
     }

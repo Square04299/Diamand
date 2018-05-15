@@ -158,4 +158,8 @@ public class View {
         System.out.println(Color.toYellow("Cave N°" + (game.getCave().getNbExploredEntrance() + 1)));
     }
 
+    public void playerAlreadyExist() {
+        System.out.println(Color.toRed("This player already exsit choose an other name"));
+    }
+
 }

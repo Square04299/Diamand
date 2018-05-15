@@ -14,4 +14,5 @@ public interface Tile {
      * @param explorers List of explorer
      */
     void explore(List<Explorer> explorers);
+
 }
